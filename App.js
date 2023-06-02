@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import { StyleSheet, Button, Pressable, Modal, Text, View } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps';
+import BankList from './pages/BankList';
+import BankZoom from './pages/BankZoom';
 
 const locations = [
 
@@ -51,14 +53,14 @@ export default function MapScreen({ navigation }) {
                 transparent={true}
                 visible={displayModal}
             >
-                <View style={[styles.searchView, styles.modalView]}>
-                    <Pressable
-                        title="hi"
+                <BankZoom style={styles.modalView} />
+
+                <View style={styles.exitButtonView}>
+                    <Button
+                        title="exit"
                         onPress={() => toggleDisplayModal()}
                         style={styles.exitButton}
-                    >
-                        <Text>Funny Monkey</Text>
-                    </Pressable>
+                    />
                 </View>
             </Modal>
 
@@ -87,6 +89,7 @@ export default function MapScreen({ navigation }) {
         </View>
     );
 }
+//<BankZoom style={styles.modalView} />
 
 const styles = StyleSheet.create({
 
@@ -129,16 +132,16 @@ const styles = StyleSheet.create({
 
         zIndex: 2,
         position: 'absolute',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        bottom: "5%",
         flex: 1,
     },
 
     exitButton: {
 
-        position: "absolute",
-        width:"40%",
-        height:"40%",
-        backgroundColor: "cyan",
-        borderRadius: 20,
-        elevation: 2,
+        alignItems: 'center',
+        justifyContent: 'center',
     }
 });
