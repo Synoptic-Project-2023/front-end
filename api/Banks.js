@@ -1,11 +1,24 @@
 
 /*
+    Food Banks have:
 
-Food Banks have:
+    name,
 
-name,
-location: { latitude, longitude, latitudeDelta, longitudeDelta },
+    location: { 
+        latitude, 
+        longitude, 
+        latitudeDelta, 
+        longitudeDelta 
+    },
 
+    filters: [
+
+	    0: "kosher",
+        1: "halal",
+        2: "vegan",
+        3: "vegetarian",
+        4: "peskitarian",
+    ]
 */
 
 const Banks = [
@@ -18,11 +31,13 @@ const Banks = [
             latitudeDelta: 0.01,
             longitudeDelta: 0.01,
         },
-        kosher: true,
-        halal: true,
-        vegan: true,
-        vegetarian: true,
-        peskitarian: true,
+        filters: [
+            true,
+            true,
+            true,
+            true,
+            true,
+        ]
     }
 ]
 
