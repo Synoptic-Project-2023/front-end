@@ -1,5 +1,5 @@
 ﻿
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Button, Pressable, Modal, Text, View } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps';
 
@@ -9,17 +9,57 @@ import BankZoom from './pages/BankZoom';
 
 export default function MapScreen({ navigation }) {
 
+    const mapRef = React.createRef();
+
     const [displayModal, setDisplayModal] = useState(false);
-    const [pageName, setPageName] = useState("bankZoom");
+    const [pageName, setPageName] = useState("bankList");
+    const [location, setLocation] = useState(Banks[0].location);
+    const [focusedBank, setFocusedBank] = useState(Banks[0]);
 
-    function toggleDisplayModal() {
+    function focusBank(bank) {
 
-        setDisplayModal(!displayModal);
+        setFocusedBank(bank);
+        setLocation(bank.location);
+        setDisplayModal(true);
+        setPageName("bankZoom");
+
+        mapRef.current.animateToRegion(bank.location);
     }
 
-    function focusBank({ }) {
+    function getModalPage(pageName) {
 
+        switch (pageName) {
 
+            case "bankZoom":
+                return [<BankZoom style={styles.modalView} bank={focusedBank} />];
+
+            case "bankList":
+                return [<BankList style={styles.modalView} />]
+        }
+    }
+
+    function enableDisplayModal(pageName) {
+
+        setPageName(pageName);
+        setDisplayModal(true);
+    }
+
+    function getMarkers(banksList) {
+
+        var components = [];
+
+        for (let i = 0; i < banksList.length; i++) {
+
+            if (banksList[i]) components.push(
+                <Marker
+                    coordinate={banksList[i].location}
+                    title={banksList[i].name}
+                    onPress={() => focusBank(banksList[i])}
+                />
+            );
+        }
+
+        return components;
     }
 
     return (
@@ -33,7 +73,7 @@ export default function MapScreen({ navigation }) {
             }}>
                 <Button
                     title="Search"
-                    onPress={() => toggleDisplayModal()}
+                    onPress={() => enableDisplayModal("bankList")}
                 />
             </View>
 
@@ -42,12 +82,12 @@ export default function MapScreen({ navigation }) {
                 transparent={true}
                 visible={displayModal}
             >
-                <BankZoom style={styles.modalView} bank={Banks[0]} />
+                {getModalPage(pageName)}
 
                 <View style={styles.exitButtonView}>
                     <Button
                         title="exit"
-                        onPress={() => toggleDisplayModal()}
+                        onPress={() => setDisplayModal(false)}
                         style={styles.exitButton}
                     />
                 </View>
@@ -55,13 +95,14 @@ export default function MapScreen({ navigation }) {
 
             <MapView
                 style={styles.map}
-                //specify our coordinates.
-                initialRegion={Banks[0].location}
+                initialRegion={location}
+                ref={mapRef}
+                mapPadding={{
+
+                    bottom: 300,
+                }}
             >
-                <Marker
-                    coordinate={Banks[0].location}
-                    title="Glasgow South West Foodbank"
-                />
+                {getMarkers(Banks)}
             </MapView>
         </View>
     );

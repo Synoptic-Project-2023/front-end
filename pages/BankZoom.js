@@ -23,6 +23,7 @@ export default function BankZoom(props) {
 			style={[props.style, styles.view]}
 		>
 			<Text style={styles.bankName}>{props.bank.name}</Text>
+			<Text style={styles.date}>Last updated: {props.bank.lastUpdated.toDateString()}</Text>
 
 			<View style={styles.scrollViewView}>
 				<ScrollView
@@ -51,6 +52,13 @@ const styles = StyleSheet.create({
 		fontSize: 32,
 	},
 
+	date: {
+
+		textAlign: 'center',
+		fontSize: 12,
+		color: 'grey',
+	},
+
 	scrollViewView: {
 
 		flex: 1,
@@ -60,7 +68,7 @@ const styles = StyleSheet.create({
 		marginLeft: "5%",
 		marginRight: "5%",
 		marginBottom: "100%",
-		marginTop: "10%",
+		marginTop: "2%",
 	},
 
 	scrollView: {
