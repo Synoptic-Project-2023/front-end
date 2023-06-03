@@ -3,12 +3,19 @@ import * as React from 'react';
 import { View, Text, StyleSheet, ScrollView, FlatList } from 'react-native';
 import Filter from './ui/Filter';
 
-function getLeftDetails(bank) {
-
-
-}
-
 export default function BankZoom(props) {
+
+	function getFilters(filters) {
+
+		var components = [];
+
+		for (let i = 0; i < filters.length; i++) {
+
+			if (filters[i]) components.push(<Filter index={i} />);
+		}
+
+		return components;
+	}
 
 	return (
 
@@ -19,33 +26,9 @@ export default function BankZoom(props) {
 
 			<View style={styles.scrollViewView}>
 				<ScrollView
-					horizontal
-					style={{ flex: 1 }}
-					contentContainerStyle={{
-						flexDirection: 'row',
-						flexWrap: 'wrap',
-					}}
+					contentContainerStyle={styles.scrollView}
 				>
-					<Filter index={0} />
-					<Filter index={1} />
-					<Filter index={2} />
-					<Filter index={3} />
-					<Filter index={3} />
-					<Filter index={3} />
-					<Filter index={3} />
-					<Filter index={3} />
-					<Filter index={3} />
-					<Filter index={3} />
-					<Filter index={3} />
-					<Filter index={3} />
-					<Filter index={3} />
-					<Filter index={3} />
-					<Filter index={3} />
-					<Filter index={3} />
-					<Filter index={3} />
-					<Filter index={3} />
-					<Filter index={3} />
-					<Filter index={3} />
+					{ getFilters(props.bank.filters) }
 				</ScrollView>
 			</View>
 		</View>
@@ -82,9 +65,6 @@ const styles = StyleSheet.create({
 
 	scrollView: {
 
-		flex: 1,
-		flexDirection: 'row',
-		flexWrap: 'wrap',
-		alignItems: 'flex-start' // if you want to fill rows left to right
+		padding: 5,
 	},
 })

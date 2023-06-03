@@ -18,12 +18,6 @@ export default function Filter(props) {
 
 const styles = StyleSheet.create({
 
-	name: {
-
-		marginLeft: 8,
-		fontSize: 16,
-	},
-
 	view: {
 
 		flex: 1,
@@ -31,13 +25,22 @@ const styles = StyleSheet.create({
 
 		borderRadius: 100,
 		backgroundColor: 'pink',
+		alignSelf: 'flex-start',
+
+		padding: 2,
 	},
 
 	circle: {
 
-		width: 16,
-		height: 16,
+		width: 20,
+		height: 20,
 		borderRadius: 100,
 		backgroundColor: 'blue',
-	}
+	},
+
+	name: {
+
+		marginLeft: 8,
+		fontSize: 16,
+	},
 })

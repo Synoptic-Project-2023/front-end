@@ -10,10 +10,16 @@ import BankZoom from './pages/BankZoom';
 export default function MapScreen({ navigation }) {
 
     const [displayModal, setDisplayModal] = useState(false);
+    const [pageName, setPageName] = useState("bankZoom");
 
     function toggleDisplayModal() {
 
         setDisplayModal(!displayModal);
+    }
+
+    function focusBank({ }) {
+
+
     }
 
     return (
