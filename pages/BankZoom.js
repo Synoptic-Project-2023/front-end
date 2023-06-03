@@ -1,22 +1,33 @@
 
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
-//export default class BankZoom extends React.Component {
-//
-//	render() {
-//
-//		<View style={this.props.style}></View>
-//	}
-//}
 export default function BankZoom(props) {
 
 	return (
 
 		<View
-			style={props.style}
+			style={[props.style, styles.view]}
 		>
-			<Text>Hello</Text>
+			<Text style={styles.bankName}>{props.bank.name}</Text>
 		</View>
 	)
 }
+
+const styles = StyleSheet.create({
+
+	view: {
+
+		top: "30%"
+	},
+
+	bankName: {
+
+		textAlign: 'center',
+		textAlign: 'center',
+		marginTop: 24,
+		marginLeft: 24,
+		marginRight: 24,
+		fontSize: 32,
+	},
+})
