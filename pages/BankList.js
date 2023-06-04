@@ -1,45 +1,58 @@
 
 import { useState } from 'react';
-import { StyleSheet, Button, Pressable, Modal, Text, View } from 'react-native';
+import { StyleSheet, Button, Pressable, Modal, Text, View, ScrollView } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps';
+import BankListing from './ui/BankListing';
 
-export default function BankList() {
+export default function BankList(props) {
+
+    function getBankListings(banks) {
+
+        var components = [];
+
+        for (let i = 0; i < banks.length; i++) {
+
+            if (banks[i]) components.push(<BankListing bank={banks[i]} />);
+        }
+
+        return components;
+    }
 
     return (
-        <View style={[styles.searchView, styles.modalView]}>
-            <Pressable
-                title="hi"
-                onPress={() => toggleDisplayModal()}
-                style={styles.exitButton}
-            >
-                <Text>Funny Monkey</Text>
-            </Pressable>
+
+        <View
+            style={[props.style, styles.view]}
+        >
+            <View style={styles.scrollViewView}>
+                <ScrollView style={styles.scrollView}>
+                    {getBankListings(props.banks)}
+                </ScrollView>
+            </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
 
-    modalView: {
+    view: {
 
-        flex: 1,
-        backgroundColor: 'white',
-        borderRadius: 20,
-
-        marginTop: 20,
-
-        // shadow //
-        shadowColor: '#0',
-        shadowOffset: {
-            height: -4,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 8,
-        elevation: 20,
+        top: "5%",
     },
 
-    searchView: {
+    scrollViewView: {
 
-        //top: "10%",
+        flex: 1,
+        borderRadius: 10,
+        backgroundColor: '#f0f0f0',
+
+        marginLeft: "5%",
+        marginRight: "5%",
+        marginBottom: "100%",
+        marginTop: "5%",
+    },
+
+    scrollView: {
+
+        padding: 10,
     },
 });

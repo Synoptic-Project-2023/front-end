@@ -34,7 +34,7 @@ export default function MapScreen({ navigation }) {
                 return [<BankZoom style={styles.modalView} bank={focusedBank} />];
 
             case "bankList":
-                return [<BankList style={styles.modalView} />]
+                return [<BankList style={styles.modalView} banks={Banks} />]
         }
     }
 
@@ -128,8 +128,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
         borderRadius: 20,
-
-        marginTop: 20,
 
         // shadow //
         shadowColor: '#0',
