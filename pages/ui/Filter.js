@@ -2,15 +2,21 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import Filters from '../../api/Filters';
+import ListButton from './ListButton';
 
 export default function Filter(props) {
 
 	return (
 
-		<View style={styles.view}>
+		<ListButton
+			style={styles.listButton}
+			borderRadius={20}
+			color='white'
+			downColor='rgb(210, 230, 255)'
+		>
 			<View style={styles.circle}></View>
 			<Text style={styles.name}>{Filters[props.index]}</Text>
-		</View>
+		</ListButton>
 	)
 }
 
@@ -18,7 +24,7 @@ export default function Filter(props) {
 
 const styles = StyleSheet.create({
 
-	view: {
+	listButton: {
 
 		flex: 1,
 		flexDirection: 'row',
@@ -27,13 +33,13 @@ const styles = StyleSheet.create({
 		backgroundColor: 'pink',
 		alignSelf: 'flex-start',
 
-		padding: 2,
+		padding: 5,
 	},
 
 	circle: {
 
-		width: 20,
-		height: 20,
+		width: 24,
+		height: 24,
 		borderRadius: 100,
 		backgroundColor: 'blue',
 	},
@@ -41,6 +47,7 @@ const styles = StyleSheet.create({
 	name: {
 
 		marginLeft: 8,
-		fontSize: 16,
+		marginRight: 8,
+		fontSize: 20,
 	},
 })

@@ -34,7 +34,7 @@ export default function MapScreen({ navigation }) {
                 return [<BankZoom style={styles.modalView} bank={focusedBank} />];
 
             case "bankList":
-                return [<BankList style={styles.modalView} banks={Banks} />]
+                return [<BankList style={styles.modalView} banks={Banks} focusBank={focusBank} />]
         }
     }
 

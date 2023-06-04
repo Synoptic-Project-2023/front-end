@@ -43,7 +43,75 @@ const Banks = [
     {
         name: "Salvation Army",
         location: {
-            latitude: 55.86345940907452, 
+            latitude: 55.86345940907452,
+            longitude: - 4.318126157698128,
+            latitudeDelta: 0.01,
+            longitudeDelta: 0.01,
+        },
+        lastUpdated: new Date(),
+        filters: [
+            true,
+            true,
+            false,
+            false,
+            false,
+        ]
+    },
+    {
+        name: "Salvation Army",
+        location: {
+            latitude: 55.86345940907452,
+            longitude: - 4.318126157698128,
+            latitudeDelta: 0.01,
+            longitudeDelta: 0.01,
+        },
+        lastUpdated: new Date(),
+        filters: [
+            true,
+            true,
+            false,
+            false,
+            false,
+        ]
+    },
+    {
+        name: "Salvation Army",
+        location: {
+            latitude: 55.86345940907452,
+            longitude: - 4.318126157698128,
+            latitudeDelta: 0.01,
+            longitudeDelta: 0.01,
+        },
+        lastUpdated: new Date(),
+        filters: [
+            true,
+            true,
+            false,
+            false,
+            false,
+        ]
+    },
+    {
+        name: "Salvation Army",
+        location: {
+            latitude: 55.86345940907452,
+            longitude: - 4.318126157698128,
+            latitudeDelta: 0.01,
+            longitudeDelta: 0.01,
+        },
+        lastUpdated: new Date(),
+        filters: [
+            true,
+            true,
+            false,
+            false,
+            false,
+        ]
+    },
+    {
+        name: "Salvation Army",
+        location: {
+            latitude: 55.86345940907452,
             longitude: - 4.318126157698128,
             latitudeDelta: 0.01,
             longitudeDelta: 0.01,

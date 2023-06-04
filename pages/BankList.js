@@ -12,7 +12,10 @@ export default function BankList(props) {
 
         for (let i = 0; i < banks.length; i++) {
 
-            if (banks[i]) components.push(<BankListing bank={banks[i]} />);
+            if (banks[i]) components.push(
+                <BankListing bank={banks[i]}
+                    focusBank={props.focusBank}
+                />);
         }
 
         return components;
@@ -47,7 +50,7 @@ const styles = StyleSheet.create({
 
         marginLeft: "5%",
         marginRight: "5%",
-        marginBottom: "100%",
+        marginBottom: "50%",
         marginTop: "5%",
     },
 

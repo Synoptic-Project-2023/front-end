@@ -1,7 +1,8 @@
 
 import * as React from 'react';
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import Circle from './Circle';
+import ListButton from './ListButton';
 
 export default function BankListing(props) {
 
@@ -12,7 +13,7 @@ export default function BankListing(props) {
 		for (let i = 0; i < filters.length; i++) {
 
 			if (filters[i]) components.push(
-				<Circle radius={20} style={styles.circle} />
+				<Circle radius={16} style={styles.circle} />
 			);
 		}
 
@@ -21,22 +22,26 @@ export default function BankListing(props) {
 
 	return (
 
-		<View
-			style={styles.view}
+		<ListButton
+			onPress={() => props.focusBank(props.bank)}
+			borderRadius={20}
+			color='white'
+			downColor='rgb(210, 230, 255)'
+			style={styles.listButton}
 		>
 			<Text style={styles.name}>{props.bank.name}</Text>
 
 			<View style={styles.circleView}>
 				{getFilters(props.bank.filters)}
-				<Text style={styles.away}>{props.bank.name}</Text>
+				<Text style={styles.away}>0.0m</Text>
 			</View>
-		</View>
+		</ListButton>
 	)
 }
 
 const styles = StyleSheet.create({
 
-	view: {
+	listButton: {
 
 		flex: 1,
 
@@ -49,6 +54,17 @@ const styles = StyleSheet.create({
 		padding: 5,
 		marginBottom: 10,
 		width: "100%",
+	},
+
+	pressableUp: {
+
+
+		backgroundColor: 'white',
+	},
+
+	pressableDowm: {
+
+		backgroundColor: 'rgb(210, 230, 255)',
 	},
 
 	circleView: {
@@ -66,13 +82,15 @@ const styles = StyleSheet.create({
 	name: {
 
 		marginLeft: 8,
-		fontSize: 32,
+		fontSize: 28,
 	},
 
 	away: {
 
-		fontSize: 20,
+		fontSize: 16,
 		color: 'grey',
+		flex: 1,
+		width: "100%",
 		textAlign: 'right',
 	}
 })
