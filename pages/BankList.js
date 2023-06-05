@@ -2,21 +2,27 @@
 import { useState } from 'react';
 import { StyleSheet, Button, Pressable, Modal, Text, View, ScrollView } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps';
+import Filters from '../api/Filters';
 import BankListing from './ui/BankListing';
 import OptionsBar from './ui/OptionsBar';
 
 export default function BankList(props) {
 
-    function getBankListings(banks) {
+    function getBankListings(banks, filterIndex) {
 
         var components = [];
 
         for (let i = 0; i < banks.length; i++) {
 
-            if (banks[i]) components.push(
-                <BankListing bank={banks[i]}
-                    focusBank={props.focusBank}
-                />);
+            if (filterIndex == undefined || banks[i].filters[filterIndex]) {
+
+                components.push(
+
+                    <BankListing bank={banks[i]}
+                        focusBank={props.focusBank}
+                    />
+                );
+            }
         }
 
         return components;
@@ -27,11 +33,17 @@ export default function BankList(props) {
         <View
             style={[props.style, styles.view]}
         >
+            <Text
+                style={styles.title}
+            >
+                {"Banks" + (props.filterIndex != undefined ? " with "+ Filters[props.filterIndex] : "")}
+            </Text>
+            
             <View style={styles.scrollViewView}>
                 <ScrollView
                     style={styles.scrollView}
                 >
-                    {getBankListings(props.banks)}
+                    {getBankListings(props.banks, props.filterIndex)}
                 </ScrollView>
             </View>
 
@@ -49,7 +61,7 @@ const styles = StyleSheet.create({
 
     view: {
 
-        top: "5%",
+        top: "10%",
     },
 
     scrollViewView: {
@@ -60,8 +72,8 @@ const styles = StyleSheet.create({
 
         marginLeft: "5%",
         marginRight: "5%",
-        marginBottom: "40%",
-        marginTop: "5%",
+        marginBottom: "50%",
+        marginTop: "2%",
     },
 
     scrollView: {
@@ -72,8 +84,15 @@ const styles = StyleSheet.create({
     optionsBar: {
 
         position: 'absolute',
-        bottom: "12%",
+        bottom: "18%",
         width: "60%",
         left: "20%",
-    }
+    },
+
+    title: {
+
+        fontSize: 32,
+        paddingTop: 10,
+        textAlign: 'center',
+    },
 });

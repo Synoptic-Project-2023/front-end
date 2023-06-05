@@ -13,6 +13,7 @@ export default function Filter(props) {
 			borderRadius={20}
 			color='white'
 			downColor='rgb(210, 230, 255)'
+			onPress={() => props.gotoFilterdList(props.index)}
 		>
 			<View style={styles.circle}></View>
 			<Text style={styles.name}>{Filters[props.index]}</Text>

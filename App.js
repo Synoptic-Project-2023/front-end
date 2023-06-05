@@ -6,7 +6,7 @@ import MapView, { Marker, Polyline } from 'react-native-maps';
 import Banks from './api/Banks';
 import BankList from './pages/BankList';
 import BankZoom from './pages/BankZoom';
-import BurgerButton from './pages/ui/burgerButton';
+import BurgerButton from './pages/ui/BurgerButton';
 import ListButton from './pages/ui/ListButton';
 
 export default function MapScreen({ navigation }) {
@@ -18,6 +18,7 @@ export default function MapScreen({ navigation }) {
     const [location, setLocation] = useState(Banks[0].location);
     const [focusedBank, setFocusedBank] = useState(Banks[0]);
     const [banks, setBanksList] = useState(Banks);
+    const [filterIndex, setFilterIndex] = useState(undefined);
 
     function focusBank(bank) {
 
@@ -34,10 +35,21 @@ export default function MapScreen({ navigation }) {
         switch (pageName) {
 
             case "bankZoom":
-                return [<BankZoom style={styles.modalView} bank={focusedBank} />];
+                return [
+                    <BankZoom
+                        style={styles.modalView}
+                        bank={focusedBank}
+                        gotoFilterdList={gotoFilterdList}
+                    />];
 
             case "bankList":
-                return [<BankList style={styles.modalView} banks={Banks} focusBank={focusBank} />]
+                return [
+                    <BankList
+                        style={styles.modalView}
+                        banks={Banks}
+                        focusBank={focusBank}
+                        filterIndex={filterIndex}
+                    />]
         }
     }
 
@@ -46,6 +58,7 @@ export default function MapScreen({ navigation }) {
         setBanksList(Banks);
         setPageName(pageName);
         setDisplayModal(true);
+        setFilterIndex(undefined);
     }
 
     function getMarkers(banksList) {
@@ -66,10 +79,10 @@ export default function MapScreen({ navigation }) {
         return components;
     }
 
-    function getFilteredList() {
+    function gotoFilterdList(filterIndex) {
 
-        enableDisplayModal("bankList");
-
+        enableDisplayModal("bankList")
+        setFilterIndex(filterIndex);
     }
 
     return (
@@ -103,6 +116,9 @@ export default function MapScreen({ navigation }) {
                 </ListButton>
             </View>
 
+            <BurgerButton text="☰" index = "0"/>
+            <BurgerButton text="👤" index = "1"/>
+            <BurgerButton text="🏦" index = "2"/>
 
             <Modal
                 // Modal //
@@ -129,7 +145,7 @@ export default function MapScreen({ navigation }) {
                                 color: 'white'
                             }}
                         >
-                            Exit
+                            🔽
                         </Text>
                     </ListButton>
                 </View>
@@ -199,13 +215,4 @@ const styles = StyleSheet.create({
         flex: 1,
         bottom: '10%',
     },
-
-    burgerText: {
-
-        fontSize: 28,
-        textAlign: 'center',
-        color: 'white',
-        margin: 10,
-        padding: 4,
-    }
 });

@@ -11,7 +11,16 @@ export default function BankZoom(props) {
 
 		for (let i = 0; i < filters.length; i++) {
 
-			if (filters[i]) components.push(<Filter index={i} />);
+			if (filters[i]) {
+
+				components.push(
+
+					<Filter
+						index={i}
+						gotoFilterdList={props.gotoFilterdList}
+					/>
+				);
+			}
 		}
 
 		return components;
