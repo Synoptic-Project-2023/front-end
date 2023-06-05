@@ -3,7 +3,15 @@ import * as React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import Circle from './Circle';
 
+/// Props include:
+/// - color
+/// - downColor
+/// - borderColor
+/// - borderRadius
+/// - onPress
 export default function ListButton(props) {
+
+	const borderColor = props.borderColor == undefined ? 'grey' : props.borderColor;
 
 	return (
 
@@ -12,7 +20,10 @@ export default function ListButton(props) {
 				styles.pressable,
 				props.style,
 				!pressed ? { backgroundColor: props.color } : { backgroundColor: props.downColor },
-				{ borderRadius: props.borderRadius }
+				{
+					borderRadius: props.borderRadius,
+					borderColor: borderColor,
+				}
 			]}
 			onPress={props.onPress}
 		>

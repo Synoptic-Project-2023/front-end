@@ -6,6 +6,8 @@ import MapView, { Marker, Polyline } from 'react-native-maps';
 import Banks from './api/Banks';
 import BankList from './pages/BankList';
 import BankZoom from './pages/BankZoom';
+import BurgerButton from './pages/ui/burgerButton';
+import ListButton from './pages/ui/ListButton';
 
 export default function MapScreen({ navigation }) {
 
@@ -15,6 +17,7 @@ export default function MapScreen({ navigation }) {
     const [pageName, setPageName] = useState("bankList");
     const [location, setLocation] = useState(Banks[0].location);
     const [focusedBank, setFocusedBank] = useState(Banks[0]);
+    const [banks, setBanksList] = useState(Banks);
 
     function focusBank(bank) {
 
@@ -40,6 +43,7 @@ export default function MapScreen({ navigation }) {
 
     function enableDisplayModal(pageName) {
 
+        setBanksList(Banks);
         setPageName(pageName);
         setDisplayModal(true);
     }
@@ -62,22 +66,46 @@ export default function MapScreen({ navigation }) {
         return components;
     }
 
+    function getFilteredList() {
+
+        enableDisplayModal("bankList");
+
+    }
+
     return (
         <View style={styles.container}>
 
-            <View style={{
+            <View
+                // Search Button //
+                style={{
                 zIndex: 1,
                 position: 'absolute',
                 flex: 1,
-                bottom: '5%',
+                bottom: '2%',
             }}>
-                <Button
-                    title="Search"
+                <ListButton
                     onPress={() => enableDisplayModal("bankList")}
-                />
+                    borderRadius={10}
+                    color='white'
+                    borderColor='#4a80f5'
+                    downColor='#9bbff4'
+                >
+                    <Text
+                        style={{
+                            fontSize: 64,
+                            textAlign: 'center',
+                            color: 'white',
+                            padding: 5,
+                        }}
+                    >
+                        🔍
+                    </Text>
+                </ListButton>
             </View>
 
+
             <Modal
+                // Modal //
                 animationType="slide"
                 transparent={true}
                 visible={displayModal}
@@ -85,21 +113,36 @@ export default function MapScreen({ navigation }) {
                 {getModalPage(pageName)}
 
                 <View style={styles.exitButtonView}>
-                    <Button
-                        title="exit"
+
+                    <ListButton
                         onPress={() => setDisplayModal(false)}
                         style={styles.exitButton}
-                    />
+                        borderRadius={10}
+                        borderColor='#9bbff4'
+                        color='#4a80f5'
+                        downColor='#9bbff4'
+                    >
+                        <Text
+                            style={{
+                                fontSize: 32,
+                                textAlign: 'center',
+                                color: 'white'
+                            }}
+                        >
+                            Exit
+                        </Text>
+                    </ListButton>
                 </View>
             </Modal>
 
             <MapView
+                // Map //
                 style={styles.map}
                 initialRegion={location}
                 ref={mapRef}
                 mapPadding={{
 
-                    bottom: 300,
+                    bottom: 400,
                 }}
             >
                 {getMarkers(Banks)}
@@ -144,7 +187,7 @@ const styles = StyleSheet.create({
         zIndex: 2,
         position: 'absolute',
         flex: 1,
-        bottom: "2%",
+        bottom: "0%",
         width: "20%",
         left: "40%",
     },
@@ -155,5 +198,14 @@ const styles = StyleSheet.create({
         position: 'absolute',
         flex: 1,
         bottom: '10%',
+    },
+
+    burgerText: {
+
+        fontSize: 28,
+        textAlign: 'center',
+        color: 'white',
+        margin: 10,
+        padding: 4,
     }
 });
