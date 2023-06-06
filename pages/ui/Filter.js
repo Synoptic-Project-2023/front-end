@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
 		borderRadius: 100,
 		backgroundColor: 'pink',
 		alignSelf: 'flex-start',
-
+		minWidth: 100,
 		padding: 5,
 	},
 

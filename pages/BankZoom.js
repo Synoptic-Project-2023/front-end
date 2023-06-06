@@ -82,7 +82,9 @@ const styles = StyleSheet.create({
 	},
 
 	scrollView: {
-
+		flexWrap: 'wrap',
+		gap: 5,
+		flexDirection: 'row',
 		padding: 5,
 	},
 })
