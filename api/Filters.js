@@ -5,7 +5,6 @@ const Filters = [
     "halal",
     "vegan",
     "vegetarian",
-    "peskitarian",
 ]
 
 export default Filters;
