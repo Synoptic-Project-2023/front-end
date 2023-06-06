@@ -29,6 +29,11 @@ export default function BankList(props) {
         return components;
     }
 
+    function helloWorld() {
+
+        console.log("Hello world!")
+    }
+
     return (
 
         <View
@@ -50,6 +55,7 @@ export default function BankList(props) {
 
             <OptionsBar
                 texts={["Filters", "Sort By"]}
+                functions={[helloWorld, props.gotoFilterList]}
                 style={styles.optionsBar}
                 fontSize={20}
                 margin={5}

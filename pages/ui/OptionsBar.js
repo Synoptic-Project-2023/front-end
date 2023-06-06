@@ -25,6 +25,7 @@ export default function OptionsBar(props) {
 					style={{
 						margin: props.margin,
 					}}
+					onPress={functions[i]}
 				>
 					<Text
 						style={{

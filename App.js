@@ -4,8 +4,10 @@ import { StyleSheet, Button, Pressable, Modal, Text, View } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps';
 
 import Banks from './api/Banks';
+import Filters from './api/Filters';
 import BankList from './pages/BankList';
 import BankZoom from './pages/BankZoom';
+import FilterList from './pages/FilterList';
 import BurgerButton from './pages/ui/BurgerButton';
 import ListButton from './pages/ui/ListButton';
 
@@ -37,21 +39,33 @@ export default function MapScreen({ navigation }) {
             case "bankZoom":
                 return (
                     <BankZoom
-                        key = {'b'}
+                        key={'b'}
                         style={styles.modalView}
                         bank={focusedBank}
-                        gotoFilterdList={gotoFilterdList}
-                    />);
+                        gotoFilteredList={gotoFilterdList}
+                    />
+                );
 
             case "bankList":
                 return (
                     <BankList
-                        key = {'a'}
+                        key={'a'}
                         style={styles.modalView}
                         banks={Banks}
                         focusBank={focusBank}
                         filterIndex={filterIndex}
-                    />);
+                        gotoFilterList={() => enableDisplayModal("filterList")}
+                    />
+                );
+
+            case "filterList":
+                return (
+                    <FilterList
+                        style={styles.modalView}
+                        filters={Filters}
+                        gotoFilteredList={gotoFilterdList}
+                    />
+                );
         }
     }
 
