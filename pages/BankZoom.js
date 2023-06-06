@@ -16,6 +16,7 @@ export default function BankZoom(props) {
 				components.push(
 
 					<Filter
+						key={i}
 						index={i}
 						gotoFilterdList={props.gotoFilterdList}
 					/>

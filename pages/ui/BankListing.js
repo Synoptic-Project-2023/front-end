@@ -13,7 +13,7 @@ export default function BankListing(props) {
 		for (let i = 0; i < filters.length; i++) {
 
 			if (filters[i]) components.push(
-				<Circle radius={16} style={styles.circle} />
+				<Circle radius={16} style={styles.circle} key = {i+'circle'} />
 			);
 		}
 

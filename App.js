@@ -35,21 +35,23 @@ export default function MapScreen({ navigation }) {
         switch (pageName) {
 
             case "bankZoom":
-                return [
+                return (
                     <BankZoom
+                        key = {'b'}
                         style={styles.modalView}
                         bank={focusedBank}
                         gotoFilterdList={gotoFilterdList}
-                    />];
+                    />);
 
             case "bankList":
-                return [
+                return (
                     <BankList
+                        key = {'a'}
                         style={styles.modalView}
                         banks={Banks}
                         focusBank={focusBank}
                         filterIndex={filterIndex}
-                    />]
+                    />);
         }
     }
 
@@ -69,6 +71,7 @@ export default function MapScreen({ navigation }) {
 
             if (banksList[i]) components.push(
                 <Marker
+                    key = {i+'a'}
                     coordinate={banksList[i].location}
                     title={banksList[i].name}
                     onPress={() => focusBank(banksList[i])}

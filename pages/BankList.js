@@ -20,6 +20,7 @@ export default function BankList(props) {
 
                     <BankListing bank={banks[i]}
                         focusBank={props.focusBank}
+                        key = {i + 'banklist'}
                     />
                 );
             }

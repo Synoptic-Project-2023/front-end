@@ -13,14 +13,12 @@ export default function OptionsBar(props) {
 	function getListButtons(texts, functions) {
 
 		var components = [];
-		var optionWidth = 100 / texts.length;
-
-		console.log(optionWidth);
 
 		for (var i = 0; i < texts.length; i++) {
 
 			components.push(
 				<ListButton
+					key={i + 'b'}
 					borderRadius={20}
 					color='white'
 					downColor='grey'
