@@ -137,7 +137,7 @@ export default function MapScreen({ navigation }) {
 
             <BurgerButton text="☰" index="0" />
             <BurgerButton text="👤" index="1" onPress={() => navigation.navigate('Profile')} />
-            <BurgerButton text="🏦" index="2" />
+            <BurgerButton text="🏦" index="2" onPress={() => navigation.navigate('UpdateBank')} />
 
             <Modal
                 // Modal //

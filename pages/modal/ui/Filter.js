@@ -5,6 +5,17 @@ import ListButton from './ListButton';
 
 export default function Filter(props) {
 
+	var customOnPress = props.gotoFilteredList == undefined;
+
+	function getOnPress(customOnPress) {
+
+		if (customOnPress)
+
+			return props.onPress;
+		else
+			return () => props.gotoFilteredList(props.index);
+	}
+
 	return (
 
 		<ListButton
@@ -12,7 +23,7 @@ export default function Filter(props) {
 			borderRadius={20}
 			color='white'
 			downColor='rgb(210, 230, 255)'
-			onPress={() => props.gotoFilteredList(props.index)}
+			onPress={getOnPress(customOnPress)}
 		>
 			<View style={styles.circle}></View>
 			<Text style={styles.name}>{props.filters[props.index]}</Text>

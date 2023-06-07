@@ -7,6 +7,7 @@ import MapScreen from './pages/MapScreen';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Request from './pages/Request'
+import UpdateBank from './pages/UpdateBank';
 
 const Stack = createNativeStackNavigator();
 
@@ -42,6 +43,13 @@ export default function App({ navigation }) {
                     component={Request}
                     options={{
                         title: 'Request Volunteer Access',
+                    }}
+                />
+                <Stack.Screen
+                    name="UpdateBank"
+                    component={UpdateBank}
+                    options={{
+                        title: 'Update Bank Inventory',
                     }}
                 />
 

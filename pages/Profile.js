@@ -2,29 +2,7 @@
 import * as React from 'react';
 import { Pressable } from 'react-native';
 import { View, StyleSheet, Text } from 'react-native';
-
-function Button(props) {
-
-	return (
-		<View>
-			<Pressable
-
-				style={({ pressed }) =>
-					[
-						styles.pressable,
-
-						pressed ? { backgroundColor: '#4285f4' } : { backgroundColor: '#1a73e8' },
-					]}
-				onPress={props.onPress}
-
-			>
-				<Text style={styles.buttonText}>
-					{props.text}
-				</Text>
-			</Pressable>
-		</View>
-	)
-}
+import MenuButton from './modal/ui/MenuButton';
 
 export default function Profile({ navigation }, props) {
 
@@ -43,12 +21,12 @@ export default function Profile({ navigation }, props) {
 				Hello,{'\n'}Placeholder{'\n'}
 			</Text>
 
-			<Button
+			<MenuButton
 				text={'Request Volunteer Access'}
 				onPress={() => navigation.navigate('Request')}
 			/>
 
-			<Button
+			<MenuButton
 				text={'Log Out'}
 				onPress={logOut}
 			/>

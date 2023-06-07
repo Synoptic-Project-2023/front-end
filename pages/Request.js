@@ -1,34 +1,16 @@
 
-import * as React from 'react';
+import { useState } from 'react';
 import { Pressable } from 'react-native';
 import { View, StyleSheet, Text } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown'
 import Banks from '../api/Banks';
-
-function Button(props) {
-
-	return (
-		<View>
-			<Pressable
-
-				style={({ pressed }) =>
-					[
-						styles.pressable,
-
-						pressed ? { backgroundColor: '#4285f4' } : { backgroundColor: '#1a73e8' },
-					]}
-				onPress={props.onPress}
-
-			>
-				<Text style={styles.pressableText}>
-					{props.text}
-				</Text>
-			</Pressable>
-		</View>
-	)
-}
+import MenuButton from './modal/ui/MenuButton';
 
 export default function Request({ navigation }, props) {
+
+	const [selectedBankIndex, setSelectedBankIndex] = useState(-1);
+	const [selected, setSelected] = useState(false);
+	const [requested, setRequested] = useState(false);
 
 	function getBankNames(banks) {
 
@@ -40,6 +22,34 @@ export default function Request({ navigation }, props) {
 		}
 
 		return names;
+	}
+
+	function prepareRequest(index) {
+
+		setSelectedBankIndex(index);
+		setSelected(true);
+	}
+
+	function sendRequest(index) {
+
+		console.log("hello");
+
+		setRequested(true);
+	}
+
+	function getMessage(banks) {
+
+		if (requested) {
+
+			return (
+				<View>
+					<Text style={styles.message}>
+						A request has been sent to us for '{banks[selectedBankIndex].name}' and you will get an email
+						if you have been approved!
+					</Text>
+				</View>
+			)
+		}
 	}
 
 	return (
@@ -55,16 +65,27 @@ export default function Request({ navigation }, props) {
 			<SelectDropdown
 				buttonStyle={styles.dropdown}
 				buttonTextStyle={styles.buttonText}
+				search={true}
 				data={getBankNames(Banks)}
+
+				onSelect={(selectedItem, index) => {
+
+					prepareRequest(index);
+				}}
 			/>
 
-			<Button
+			<MenuButton
 				text={'Request Access'}
+				onPress={() => sendRequest(selectedBankIndex)}
+				enabled={selected}
 			/>
 
+			{ getMessage(Banks) }
 		</View>
 	)
 }
+
+//{ getMessage(Banks[selectedBank]) }
 
 const styles = StyleSheet.create({
 
@@ -102,9 +123,15 @@ const styles = StyleSheet.create({
 		borderWidth: 2,
 		width: "100%",
 	},
-	
+
 	label: {
 
 		fontSize: 32,
+	},
+
+	message: {
+
+		fontSize: 16,
+		color: '#1a73e8'
 	},
 })
