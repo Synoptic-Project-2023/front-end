@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { StyleSheet, Button, Pressable, Modal, Text, View, ScrollView } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps';
-import Filters from '../api/Filters';
 import BankListing from './ui/BankListing';
 import OptionsBar from './ui/OptionsBar';
 
@@ -42,7 +41,7 @@ export default function BankList(props) {
             <Text
                 style={styles.title}
             >
-                {"Banks" + (props.filterIndex != undefined ? " with "+ Filters[props.filterIndex] : "")}
+                {"Banks" + (props.filterIndex != undefined ? " with "+ props.filters[props.filterIndex] : "")}
             </Text>
             
             <View style={styles.scrollViewView}>

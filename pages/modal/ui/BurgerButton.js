@@ -6,6 +6,7 @@ import ListButton from './ListButton';
 /// Props include:
 /// - text
 /// - index
+/// - onPress
 export default function BurgerButton(props) {
 
     const depth = 5 + props.index * 7 + (props.index == 0 ? 0 : 2.5);
@@ -14,7 +15,7 @@ export default function BurgerButton(props) {
 	return (
 
         <View
-            // Hamburger Button //
+            // Burger Button //
             style={[ styles.view, {
                 top: depth + '%',
                 right: right + '%',
@@ -26,6 +27,7 @@ export default function BurgerButton(props) {
                 borderColor='#9bbff4'
                 downColor='#9bbff4'
                 color={props.index == 0 ? '#4a80f5' : 'white'}
+                onPress={props.onPress}
             >
                 <Text style={[
 

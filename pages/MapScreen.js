@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { StyleSheet, Button, Pressable, Modal, Text, View } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps';
 
-import Banks from './api/Banks';
-import Filters from './api/Filters';
+import Banks from '../api/Banks';
+import Filters from '../api/Filters';
 import BankList from './modal/BankList';
 import BankZoom from './modal/BankZoom';
 import FilterList from './modal/FilterList';
@@ -43,6 +43,7 @@ export default function MapScreen({ navigation }) {
                         style={styles.modalView}
                         bank={focusedBank}
                         gotoFilteredList={gotoFilterdList}
+                        filters={Filters}
                     />
                 );
 
@@ -55,6 +56,7 @@ export default function MapScreen({ navigation }) {
                         focusBank={focusBank}
                         filterIndex={filterIndex}
                         gotoFilterList={() => enableDisplayModal("filterList")}
+                        filters={Filters}
                     />
                 );
 
@@ -134,7 +136,7 @@ export default function MapScreen({ navigation }) {
             </View>
 
             <BurgerButton text="☰" index="0" />
-            <BurgerButton text="👤" index="1" />
+            <BurgerButton text="👤" index="1" onPress={() => navigation.navigate('Login')} />
             <BurgerButton text="🏦" index="2" />
 
             <Modal

@@ -19,6 +19,7 @@ export default function BankZoom(props) {
 						key={i}
 						index={i}
 						gotoFilteredList={props.gotoFilteredList}
+						filters={props.filters}
 					/>
 				);
 			}

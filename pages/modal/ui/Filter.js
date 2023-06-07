@@ -1,7 +1,6 @@
 
 import * as React from 'react';
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
-import Filters from '../../api/Filters';
 import ListButton from './ListButton';
 
 export default function Filter(props) {
@@ -16,7 +15,7 @@ export default function Filter(props) {
 			onPress={() => props.gotoFilteredList(props.index)}
 		>
 			<View style={styles.circle}></View>
-			<Text style={styles.name}>{Filters[props.index]}</Text>
+			<Text style={styles.name}>{props.filters[props.index]}</Text>
 		</ListButton>
 	)
 }

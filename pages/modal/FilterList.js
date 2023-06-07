@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, ScrollView, FlatList } from 'react-native';
 import Filter from './ui/Filter';
-import Filters from '../api/Filters';
 
 export default function FilterList(props) {
 
@@ -20,6 +19,7 @@ export default function FilterList(props) {
 						key={i}
 						index={i}
 						gotoFilteredList={props.gotoFilteredList}
+						filters={filters}
 					/>
 				);
 			}
@@ -37,7 +37,7 @@ export default function FilterList(props) {
 				<ScrollView
 					contentContainerStyle={styles.scrollView}
 				>
-					{getFilters(Filters)}
+					{getFilters(props.filters)}
 				</ScrollView>
 			</View>
 		</View>
