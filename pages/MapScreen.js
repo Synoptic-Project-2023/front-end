@@ -136,7 +136,7 @@ export default function MapScreen({ navigation }) {
             </View>
 
             <BurgerButton text="☰" index="0" />
-            <BurgerButton text="👤" index="1" onPress={() => navigation.navigate('Login')} />
+            <BurgerButton text="👤" index="1" onPress={() => navigation.navigate('Profile')} />
             <BurgerButton text="🏦" index="2" />
 
             <Modal
