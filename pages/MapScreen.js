@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Button, Pressable, Modal, Text, View } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps';
+import { MAPSAPI } from '@env'
 
 import Banks from '../api/Banks';
 import Filters from '../api/Filters';
@@ -172,6 +173,8 @@ export default function MapScreen({ navigation }) {
 
             <MapView
                 // Map //
+                provider={"google"}
+                googleMapsApiKey={MAPSAPI}
                 style={styles.map}
                 initialRegion={location}
                 ref={mapRef}
