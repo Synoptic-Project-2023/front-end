@@ -110,12 +110,7 @@ export default function MapScreen({ navigation }) {
 
             <View
                 // Search Button //
-                style={{
-                    zIndex: 1,
-                    position: 'absolute',
-                    flex: 1,
-                    bottom: '2%',
-                }}>
+                style={styles.searchButtonView}>
                 <ListButton
                     onPress={() => enableDisplayModal("bankList")}
                     borderRadius={10}
@@ -194,14 +189,14 @@ const styles = StyleSheet.create({
 
     container: {
         ...StyleSheet.absoluteFillObject,
-        position: "relative",
         flex: 1, //the container will fill the whole screen.
         justifyContent: "flex-start",
-        alignItems: "center",
+        alignItems: "stretch",
     },
 
     map: {
         ...StyleSheet.absoluteFillObject,
+        alignItems: "center"
     },
 
     modalView: {
@@ -220,6 +215,8 @@ const styles = StyleSheet.create({
         elevation: 20,
     },
 
+
+
     exitButtonView: {
 
         zIndex: 2,
@@ -234,7 +231,13 @@ const styles = StyleSheet.create({
 
         zIndex: 1,
         position: 'absolute',
+        justifyContent: 'center', 
+        left: 0,
+        right: 0,
+        alignItems: 'center',
         flex: 1,
-        bottom: '10%',
+        //TODO: TERRIBLE PLEASE FIX
+        bottom: '2%',
+        
     },
 });
