@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Button, Pressable, Modal, Text, View } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps';
+import { MAPSAPI } from '@env'
 
 import Banks from '../api/Banks';
 import Filters from '../api/Filters';
@@ -109,12 +110,7 @@ export default function MapScreen({ navigation }) {
 
             <View
                 // Search Button //
-                style={{
-                    zIndex: 1,
-                    position: 'absolute',
-                    flex: 1,
-                    bottom: '2%',
-                }}>
+                style={styles.searchButtonView}>
                 <ListButton
                     onPress={() => enableDisplayModal("bankList")}
                     borderRadius={10}
@@ -172,6 +168,8 @@ export default function MapScreen({ navigation }) {
 
             <MapView
                 // Map //
+                provider={"google"}
+                googleMapsApiKey={MAPSAPI}
                 style={styles.map}
                 initialRegion={location}
                 ref={mapRef}
@@ -191,14 +189,14 @@ const styles = StyleSheet.create({
 
     container: {
         ...StyleSheet.absoluteFillObject,
-        position: "relative",
         flex: 1, //the container will fill the whole screen.
         justifyContent: "flex-start",
-        alignItems: "center",
+        alignItems: "stretch",
     },
 
     map: {
         ...StyleSheet.absoluteFillObject,
+        alignItems: "center"
     },
 
     modalView: {
@@ -217,6 +215,8 @@ const styles = StyleSheet.create({
         elevation: 20,
     },
 
+
+
     exitButtonView: {
 
         zIndex: 2,
@@ -231,7 +231,13 @@ const styles = StyleSheet.create({
 
         zIndex: 1,
         position: 'absolute',
+        justifyContent: 'center', 
+        left: 0,
+        right: 0,
+        alignItems: 'center',
         flex: 1,
-        bottom: '10%',
+        //TODO: TERRIBLE PLEASE FIX
+        bottom: '2%',
+        
     },
 });
