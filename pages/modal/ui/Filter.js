@@ -15,7 +15,7 @@ export default function Filter(props) {
 		else
 			return () => props.gotoFilteredList(props.index);
 	}
-
+	
 	return (
 
 		<ListButton
@@ -26,6 +26,7 @@ export default function Filter(props) {
 			onPress={getOnPress(customOnPress)}
 		>
 			<View style={styles.circle}></View>
+			
 			<Text style={styles.name}>{props.filters[props.index]}</Text>
 		</ListButton>
 	)

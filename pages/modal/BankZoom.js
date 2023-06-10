@@ -9,10 +9,10 @@ export default function BankZoom(props) {
 	function getFilters(filters) {
 
 		var components = [];
-		if(props.vegan){filters.push(true)} else {filters.push(false)}
-		if(props.kosher){filters.push(true)} else {filters.push(false)}
-		if(props.vegetarian){filters.push(true)} else {filters.push(false)}
-		if(props.halal){filters.push(true)} 
+		/**
+			@todo: fix this
+		**/
+		console.log(filters);
 		if(filters){
 			for (let i = 0; i < filters.length; i++) {
 
@@ -25,10 +25,6 @@ export default function BankZoom(props) {
 							index={i}
 							gotoFilteredList={props.gotoFilteredList}
 							filters={props.filters}
-							vegan={props.vegan}
-							kosher={props.kosher}
-							vegetarian={props.vegetarian}
-							halal={props.halal}
 						/>
 					);
 				}
@@ -49,7 +45,7 @@ export default function BankZoom(props) {
 				<ScrollView
 					contentContainerStyle={styles.scrollView}
 				>
-					{ getFilters(props.bank.filters) }
+					{ getFilters([props.bank.vegan, props.bank.vegetarian, props.bank.halal, props.bank.kosher]) }
 				</ScrollView>
 			</View>
 		</View>

@@ -69,14 +69,15 @@ const styles = StyleSheet.create({
 
 	scrollViewView: {
 
-		flex: 1,
-		borderRadius: 10,
-		backgroundColor: '#f0f0f0',
-
-		marginLeft: "5%",
-		marginRight: "5%",
-		marginBottom: "100%",
-		marginTop: "2%",
+        flex: 1,
+        borderRadius: 10,
+        backgroundColor: '#f0f0f0',
+        ...StyleSheet.absoluteFillObject,
+        marginLeft: "5%",
+        marginRight: "5%",
+        marginBottom: 150,
+        marginTop: 75,
+        bottom: "10%",
 	},
 
 	scrollView: {

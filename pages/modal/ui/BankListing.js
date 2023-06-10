@@ -32,7 +32,7 @@ export default function BankListing(props) {
 			<Text style={styles.name}>{props.bank.bankName}</Text>
 
 			<View style={styles.circleView}>
-				{getFilters(props.bank.filters)}
+				{getFilters([props.bank.kosher, props.bank.halal, props.bank.vegan, props.bank.vegetarian])}
 				<Text style={styles.away}>0.0m</Text>
 			</View>
 		</ListButton>

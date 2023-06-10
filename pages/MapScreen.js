@@ -20,8 +20,8 @@ export default function MapScreen({ navigation }) {
 
     const [displayModal, setDisplayModal] = useState(false);
     const [pageName, setPageName] = useState("bankList");
-    const [location, setLocation] = useState(Banks[0].location);
-    const [focusedBank, setFocusedBank] = useState(Banks[0]);
+    const [location, setLocation] = useState(Banks[1].location);
+    const [focusedBank, setFocusedBank] = useState(Banks[1]);
     const [banks, setBanksList] = useState([]);
     const [filterIndex, setFilterIndex] = useState(undefined);
 
