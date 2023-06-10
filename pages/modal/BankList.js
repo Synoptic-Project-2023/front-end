@@ -55,7 +55,7 @@ export default function BankList(props) {
 
             <OptionsBar
                 texts={["Filters", "Sort By"]}
-                functions={[helloWorld, props.gotoFilterList]}
+                functions={[props.gotoFilterList, helloWorld]}
                 style={styles.optionsBar}
                 fontSize={20}
                 margin={5}
