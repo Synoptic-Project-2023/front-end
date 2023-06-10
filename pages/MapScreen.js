@@ -55,6 +55,7 @@ export default function MapScreen({ navigation }) {
                 );
 
             case "bankList":
+                console.log(filterIndex)
                 return (
                     <BankList
                         key={'a'}
@@ -89,12 +90,12 @@ export default function MapScreen({ navigation }) {
         }
     }
 
-    async function enableDisplayModal(pageName) {
+    async function enableDisplayModal(pageName, filterIndex = undefined) {
 
         fetchBanksList;
         setPageName(pageName);
         setDisplayModal(true);
-        setFilterIndex(undefined);
+        setFilterIndex(filterIndex);
     }
 
     function getMarkers(banksList) {
@@ -118,8 +119,7 @@ export default function MapScreen({ navigation }) {
 
     function gotoFilterdList(filterIndex) {
 
-        enableDisplayModal("bankList")
-        setFilterIndex(filterIndex);
+        enableDisplayModal("bankList", filterIndex)
     }
 
     return (
