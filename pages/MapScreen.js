@@ -37,7 +37,7 @@ export default function MapScreen({ navigation }) {
     }
 
     useEffect(() => {
-        fetchBanksList();
+        fetchBanksList;
     }, []);
 
     function getModalPage(pageName) {
@@ -92,7 +92,7 @@ export default function MapScreen({ navigation }) {
 
     async function enableDisplayModal(pageName, filterIndex = undefined) {
 
-        fetchBanksList;
+        await fetchBanksList();
         setPageName(pageName);
         setDisplayModal(true);
         setFilterIndex(filterIndex);

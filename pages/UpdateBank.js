@@ -46,11 +46,11 @@ export default function UpdateBank({ route }) {
 
 	function getFilterButtons(filters, filterDictionary, onPress) {
 
-		return filters.map((filterIndex, index) => {
-			const key = `filter_${filterIndex}_${index}`;
+		return filters.map((filterIndex) => {
+			const filter = filterDictionary[filterIndex];
 			return (
 				<Filter
-					key={key}
+					key={filterIndex}
 					index={filterIndex}
 					filters={filterDictionary}
 					onPress={() => onPress(filterIndex)}
@@ -75,13 +75,6 @@ export default function UpdateBank({ route }) {
 		}
 	}
 
-	function getSelectedBankFilters() {
-		const selectedBank = userBanks[selectedBankIndex];
-		if (selectedBank) {
-			return getFilterButtons(selectedFilters, Filters, disableFilter);
-		}
-		return null;
-	}
 
 	function enableFilter(index) {
 
@@ -106,12 +99,32 @@ export default function UpdateBank({ route }) {
 		setRemainingFilters(updatedRemainingFilters);
 		setSelectedFilters(updatedSelectedFilters);
 	}
-	function sendRequest(index) {
-		const selectedBank = userBanks[index];
-		const selectedBankFilters = selectedFilters.map(
-			(filterIndex) => remainingFilters[filterIndex]
-		);
-		console.log(selectedBankFilters);
+	
+	function sendRequest() {
+	
+		const actualFilterIndices = selectedFilters.map((filterIndex) => Filters[filterIndex]);
+		const updatedFilters = {
+			kosher: actualFilterIndices.includes("kosher"),
+			halal: actualFilterIndices.includes("halal"),
+			vegan: actualFilterIndices.includes("vegan"),
+			vegetarian: actualFilterIndices.includes("vegetarian")
+		}
+
+		fetch(API_BASE + "/foodbank/" + userBanks[selectedBankIndex]._id, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(updatedFilters)
+		}).then((response) => {
+			if(response.ok){
+				console.log("updated")
+			} else {
+				console.log("error updating")
+			}
+		}).catch((e) => {
+			console.log("Network error", e)
+		})
 	}
 
 	return (
@@ -145,7 +158,7 @@ export default function UpdateBank({ route }) {
 						setSelectedFilters(
 							bankFilters.map((value, index) => (value ? index : -1)).filter((index) => index !== -1)
 						);
-							setRemainingFilters(
+						setRemainingFilters(
 							bankFilters.map((value, index) => (value ? -1 : index)).filter((index) => index !== -1)
 						);
 					}
@@ -178,7 +191,7 @@ export default function UpdateBank({ route }) {
 
 			<MenuButton
 				text={'Update'}
-				onPress={() => sendRequest(selectedBankIndex)}
+				onPress={() => sendRequest()}
 			/>
 
 			{getMessage(Banks)}
