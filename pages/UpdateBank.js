@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Pressable, ScrollView } from 'react-native';
 import { View, StyleSheet, Text } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown'
@@ -8,62 +8,57 @@ import Filters from '../api/Filters';
 import Filter from './modal/ui/Filter';
 import MenuButton from './modal/ui/MenuButton';
 
-export default function UpdateBank({ navigation }, props) {
+const API_BASE = 'http://localhost:3001/api'
 
-	const [selectedBankIndex, setSelectedBankIndex] = useState(-1);
+export default function UpdateBank({ route }) {
 
-	const [selected, setSelected] = useState(false);
-	const [requested, setRequested] = useState(false);
+    const [selectedBankIndex, setSelectedBankIndex] = useState(-1);
+    const [selected, setSelected] = useState(false);
+    const [requested, setRequested] = useState(false);
+    const [remainingFilters, setRemainingFilters] = useState([0, 1, 2, 3]);
+    const [selectedFilters, setSelectedFilters] = useState([]);
+	const [userBanks, setUserBanks] = useState([])
 
-	const [remainingFilters, setRemainingFilters] = useState(
+    const { banks, userId } = route.params;
 
-		[0,1,2,3]
-	)
-	const [selectedFilters, setSelectedFilters] = useState([]);
+    useEffect(() => {
+        fetchBanks();
+    }, []);
 
-	function initialiseRemainingFilters(filters) {
-
-		var list = [];
-
-		for (var i = 0; i < filters.length; i++) {
-
-			list.push(i);
+	async function fetchBanks() {
+		try {
+			const response = await fetch(API_BASE + `/user/${userId}/foodbanks`);
+			const data = await response.json();
+			setUserBanks(data);
+			setRemainingFilters(initialiseRemainingFilters(Filters.length));
+		} catch (error) {
+			console.log(error);
 		}
-
-		return list;
 	}
 
-	function getBankNames(banks) {
+    function initialiseRemainingFilters(filterCount) {
+        return Array.from({ length: filterCount }, (_, index) => index);
+    }
 
-		var names = [];
-
-		for (var i = 0; i < banks.length; i++) {
-
-			names.push(banks[i].name);
-		}
-
-		return names;
-	}
+    function getBankNames() {
+        return userBanks.map((bank) => bank.bankName);
+    }
 
 	function getFilterButtons(filters, filterDictionary, onPress) {
 
-		let components = [];
-
-		for (let i = 0; i < filters.length; i++) {
-
-			components.push(
-
+		return filters.map((filterIndex, index) => {
+			const key = `filter_${filterIndex}_${index}`;
+			return (
 				<Filter
-					key={filters[i]}
-					index={filters[i]}
+					key={key}
+					index={filterIndex}
 					filters={filterDictionary}
-					onPress={() => onPress(filters[i])}
+					onPress={() => onPress(filterIndex)}
 				/>
 			);
-		}
-
-		return components;
+		});
 	}
+	
 
 	function getMessage(banks) {
 
@@ -80,26 +75,43 @@ export default function UpdateBank({ navigation }, props) {
 		}
 	}
 
+	function getSelectedBankFilters() {
+		const selectedBank = userBanks[selectedBankIndex];
+		if (selectedBank) {
+			return getFilterButtons(selectedFilters, Filters, disableFilter);
+		}
+		return null;
+	}
+
 	function enableFilter(index) {
 
-		let listIndex = remainingFilters.indexOf(index);
+		const listIndex = remainingFilters.indexOf(index);
+		const updatedRemainingFilters = [...remainingFilters];
+		updatedRemainingFilters.splice(listIndex, 1);
+		
+		const updatedSelectedFilters = [...selectedFilters, index];
 
-		remainingFilters.splice(listIndex, 1);
-		setRemainingFilters(remainingFilters);
+		setRemainingFilters(updatedRemainingFilters);
+		setSelectedFilters(updatedSelectedFilters);
 
-		selectedFilters.push(index);
-		setSelectedFilters(selectedFilters);
 	}
 
 	function disableFilter(index) {
-
-		let listIndex = remainingFilters.indexOf(index);
-
-		remainingFilters.push(index);
-		setRemainingFilters(remainingFilters);
-
-		selectedFilters.splice(listIndex, 1);
-		setSelectedFilters(selectedFilters);
+		const listIndex = selectedFilters.indexOf(index);
+		const updatedSelectedFilters = [...selectedFilters];
+		updatedSelectedFilters.splice(listIndex, 1);
+		
+		const updatedRemainingFilters = [...remainingFilters, index];
+		
+		setRemainingFilters(updatedRemainingFilters);
+		setSelectedFilters(updatedSelectedFilters);
+	}
+	function sendRequest(index) {
+		const selectedBank = userBanks[index];
+		const selectedBankFilters = selectedFilters.map(
+			(filterIndex) => remainingFilters[filterIndex]
+		);
+		console.log(selectedBankFilters);
 	}
 
 	return (
@@ -116,12 +128,27 @@ export default function UpdateBank({ navigation }, props) {
 				buttonStyle={styles.dropdown}
 				buttonTextStyle={styles.buttonText}
 				search={true}
-				data={getBankNames(Banks)}
+				data={getBankNames(banks)}
 
 				onSelect={(selectedItem, index) => {
 
 					setSelected(true);
 					setSelectedBankIndex(index);
+					const selectedBank = userBanks[index]
+					if(selectedBank) {
+						const bankFilters = [
+							selectedBank.kosher,
+							selectedBank.halal,
+							selectedBank.vegan,
+							selectedBank.vegetarian,
+						];
+						setSelectedFilters(
+							bankFilters.map((value, index) => (value ? index : -1)).filter((index) => index !== -1)
+						);
+							setRemainingFilters(
+							bankFilters.map((value, index) => (value ? -1 : index)).filter((index) => index !== -1)
+						);
+					}
 				}}
 			/>
 
