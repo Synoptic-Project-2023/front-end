@@ -4,27 +4,36 @@ import { View, Text, StyleSheet, ScrollView, FlatList } from 'react-native';
 import Filter from './ui/Filter';
 
 export default function BankZoom(props) {
+	const updatedAtDate = new Date(props.bank.updatedAt).toDateString();
 
 	function getFilters(filters) {
 
 		var components = [];
+		if(props.vegan){filters.push(true)} else {filters.push(false)}
+		if(props.kosher){filters.push(true)} else {filters.push(false)}
+		if(props.vegetarian){filters.push(true)} else {filters.push(false)}
+		if(props.halal){filters.push(true)} 
+		if(filters){
+			for (let i = 0; i < filters.length; i++) {
 
-		for (let i = 0; i < filters.length; i++) {
+				if (filters[i]) {
 
-			if (filters[i]) {
+					components.push(
 
-				components.push(
-
-					<Filter
-						key={i}
-						index={i}
-						gotoFilteredList={props.gotoFilteredList}
-						filters={props.filters}
-					/>
-				);
+						<Filter
+							key={i}
+							index={i}
+							gotoFilteredList={props.gotoFilteredList}
+							filters={props.filters}
+							vegan={props.vegan}
+							kosher={props.kosher}
+							vegetarian={props.vegetarian}
+							halal={props.halal}
+						/>
+					);
+				}
 			}
 		}
-
 		return components;
 	}
 
@@ -33,8 +42,8 @@ export default function BankZoom(props) {
 		<View
 			style={[props.style, styles.view]}
 		>
-			<Text style={styles.bankName}>{props.bank.name}</Text>
-			<Text style={styles.date}>Last updated: {props.bank.lastUpdated.toDateString()}</Text>
+			<Text style={styles.bankName}>{props.bank.bankName}</Text>
+			<Text style={styles.date}>Last updated: {updatedAtDate}</Text>
 
 			<View style={styles.scrollViewView}>
 				<ScrollView

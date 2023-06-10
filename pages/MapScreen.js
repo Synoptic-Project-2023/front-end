@@ -1,5 +1,5 @@
 ﻿
-import React, { useState } from 'react';
+import React, { useEffect, useInsertionEffect, useState } from 'react';
 import { StyleSheet, Button, Pressable, Modal, Text, View } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps';
 import { MAPSAPI } from '@env'
@@ -12,6 +12,8 @@ import FilterList from './modal/FilterList';
 import BurgerButton from './modal/ui/BurgerButton';
 import ListButton from './modal/ui/ListButton';
 
+const API_BASE = 'http://localhost:3001/api'
+
 export default function MapScreen({ navigation }) {
 
     const mapRef = React.createRef();
@@ -20,7 +22,7 @@ export default function MapScreen({ navigation }) {
     const [pageName, setPageName] = useState("bankList");
     const [location, setLocation] = useState(Banks[0].location);
     const [focusedBank, setFocusedBank] = useState(Banks[0]);
-    const [banks, setBanksList] = useState(Banks);
+    const [banks, setBanksList] = useState([]);
     const [filterIndex, setFilterIndex] = useState(undefined);
 
     function focusBank(bank) {
@@ -32,6 +34,10 @@ export default function MapScreen({ navigation }) {
 
         mapRef.current.animateToRegion(bank.location);
     }
+
+    useEffect(() => {
+        fetchBanksList();
+    }, []);
 
     function getModalPage(pageName) {
 
@@ -53,7 +59,7 @@ export default function MapScreen({ navigation }) {
                     <BankList
                         key={'a'}
                         style={styles.modalView}
-                        banks={Banks}
+                        banks={banks}
                         focusBank={focusBank}
                         filterIndex={filterIndex}
                         gotoFilterList={() => enableDisplayModal("filterList")}
@@ -72,9 +78,20 @@ export default function MapScreen({ navigation }) {
         }
     }
 
-    function enableDisplayModal(pageName) {
+    async function fetchBanksList(){
+        try{
+            const response = await fetch(API_BASE + '/foodbank')
+            const data = await response.json()
+            await setBanksList(data);
+            console.log(banks)
+        } catch (e){
+            console.log(e)
+        }
+    }
 
-        setBanksList(Banks);
+    async function enableDisplayModal(pageName) {
+
+        fetchBanksList;
         setPageName(pageName);
         setDisplayModal(true);
         setFilterIndex(undefined);
@@ -174,11 +191,10 @@ export default function MapScreen({ navigation }) {
                 initialRegion={location}
                 ref={mapRef}
                 mapPadding={{
-
                     bottom: 400,
                 }}
             >
-                {getMarkers(Banks)}
+                {getMarkers(banks)}
             </MapView>
         </View>
     );
