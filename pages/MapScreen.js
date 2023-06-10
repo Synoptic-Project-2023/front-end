@@ -24,6 +24,7 @@ export default function MapScreen({ navigation }) {
     const [focusedBank, setFocusedBank] = useState(Banks[1]);
     const [banks, setBanksList] = useState([]);
     const [filterIndex, setFilterIndex] = useState(undefined);
+    const userId = "647e4f57c4c3e2d33179df25"
 
     function focusBank(bank) {
 
@@ -55,7 +56,6 @@ export default function MapScreen({ navigation }) {
                 );
 
             case "bankList":
-                console.log(filterIndex)
                 return (
                     <BankList
                         key={'a'}
@@ -150,7 +150,7 @@ export default function MapScreen({ navigation }) {
 
             <BurgerButton text="☰" index="0" />
             <BurgerButton text="👤" index="1" onPress={() => navigation.navigate('Profile')} />
-            <BurgerButton text="🏦" index="2" onPress={() => navigation.navigate('UpdateBank')} />
+            <BurgerButton text="🏦" index="2" onPress={() => navigation.navigate('UpdateBank', { banks, userId })} />
 
             <Modal
                 // Modal //
