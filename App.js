@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Request from './pages/Request'
 import UpdateBank from './pages/UpdateBank';
+import Inbox from './pages/Inbox'
 
 const Stack = createNativeStackNavigator();
 
@@ -51,6 +52,13 @@ export default function App({ navigation }) {
                     component={UpdateBank}
                     options={{
                         title: 'Update Bank Inventory',
+                    }}
+                />
+                <Stack.Screen
+                    name="Inbox"
+                    component={Inbox}
+                    options={{
+                        title: 'Inbox',
                     }}
                 />
 

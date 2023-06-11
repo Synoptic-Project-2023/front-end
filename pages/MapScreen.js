@@ -185,7 +185,12 @@ export default function MapScreen({ navigation }) {
 
             <BurgerButton text="☰" index="0" />
             <BurgerButton text="👤" index="1" onPress={() => navigation.navigate(loggedIn, { currentUser, logOut, logIn, API_BASE, banks})} />
-            <BurgerButton text="🏦" index="2" onPress={() => navigation.navigate('UpdateBank', { banks, currentUser })} />
+            {(currentUser.access === 'volunteer' || currentUser.access === 'admin') &&
+                <BurgerButton text="🏦" index="2" onPress={() => navigation.navigate('UpdateBank', { banks, currentUser })} />
+            }
+            {(currentUser.access === 'admin') &&
+                <BurgerButton text="✉️" index="3" onPress={() => navigation.navigate('Inbox', { banks, currentUser })} />
+            }
 
             <Modal
                 // Modal //
