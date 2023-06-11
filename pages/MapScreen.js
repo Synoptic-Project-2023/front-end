@@ -2,7 +2,7 @@
 import React, { useEffect, useInsertionEffect, useState } from 'react';
 import { StyleSheet, Button, Pressable, Modal, Text, View } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps';
-import { MAPSAPI } from '@env'
+import { MAPSAPI, API_BASE } from '@env'
 
 import Banks from '../api/Banks';
 import Filters from '../api/Filters';
@@ -11,8 +11,6 @@ import BankZoom from './modal/BankZoom';
 import FilterList from './modal/FilterList';
 import BurgerButton from './modal/ui/BurgerButton';
 import ListButton from './modal/ui/ListButton';
-
-const API_BASE = 'http://localhost:3001/api'
 
 
 
@@ -186,7 +184,7 @@ export default function MapScreen({ navigation }) {
             <BurgerButton text="☰" index="0" />
             <BurgerButton text="👤" index="1" onPress={() => navigation.navigate(loggedIn, { currentUser, logOut, logIn, API_BASE, banks})} />
             {(currentUser.access === 'volunteer' || currentUser.access === 'admin') &&
-                <BurgerButton text="🏦" index="2" onPress={() => navigation.navigate('UpdateBank', { banks, currentUser })} />
+                <BurgerButton text="🏦" index="2" onPress={() => navigation.navigate('UpdateBank', { banks, currentUser, API_BASE })} />
             }
             {(currentUser.access === 'admin') &&
                 <BurgerButton text="✉️" index="3" onPress={() => navigation.navigate('Inbox', { banks, currentUser, API_BASE })} />

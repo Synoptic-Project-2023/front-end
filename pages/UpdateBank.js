@@ -8,8 +8,6 @@ import Filters from '../api/Filters';
 import Filter from './modal/ui/Filter';
 import MenuButton from './modal/ui/MenuButton';
 
-const API_BASE = 'http://localhost:3001/api'
-
 export default function UpdateBank({ route }) {
 
     const [selectedBankIndex, setSelectedBankIndex] = useState(-1);
@@ -19,7 +17,7 @@ export default function UpdateBank({ route }) {
     const [selectedFilters, setSelectedFilters] = useState([]);
 	const [userBanks, setUserBanks] = useState([])
 
-    const { banks, currentUser } = route.params;
+    const { banks, currentUser, API_BASE } = route.params;
 
     useEffect(() => {
         fetchBanks();
