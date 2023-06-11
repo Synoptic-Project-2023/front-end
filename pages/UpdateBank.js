@@ -206,9 +206,9 @@ const styles = StyleSheet.create({
 
 		flex: 1,
 		left: "10%",
-		top: "10%",
+		top: "5%",
 		width: "80%",
-		height: "80%",
+		height: "85%",
 	},
 
 	dropdown: {
@@ -234,6 +234,7 @@ const styles = StyleSheet.create({
 	},
 
 	scrollViewView: {
+
 		borderRadius: 10,
 		backgroundColor: 'white',
 		height: "30%",
@@ -249,6 +250,7 @@ const styles = StyleSheet.create({
 	},
 
 	scrollViewViewSelected: {
+
 		borderRadius: 10,
 		backgroundColor: 'white',
 		height: "10%",
