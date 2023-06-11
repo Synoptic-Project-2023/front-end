@@ -10,6 +10,7 @@ import Profile from './pages/Profile';
 import Request from './pages/Request'
 import UpdateBank from './pages/UpdateBank';
 import Inbox from './pages/Inbox'
+import Register from './pages/Register'
 
 const Stack = createNativeStackNavigator();
 
@@ -59,6 +60,13 @@ export default function App({ navigation }) {
                     component={Inbox}
                     options={{
                         title: 'Inbox',
+                    }}
+                />
+                <Stack.Screen
+                    name="Register"
+                    component={Register}
+                    options={{
+                        title: 'Register',
                     }}
                 />
 
