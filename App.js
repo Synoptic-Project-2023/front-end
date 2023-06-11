@@ -1,13 +1,16 @@
 
 import * as React from 'react';
+import { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import MapScreen from './pages/MapScreen';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
-import Request from './pages/Request'
+import Request from './pages/Request';
 import UpdateBank from './pages/UpdateBank';
+import Messages from './pages/Messages';
+import Register from './pages/Register';
 
 const Stack = createNativeStackNavigator();
 
@@ -50,6 +53,20 @@ export default function App({ navigation }) {
                     component={UpdateBank}
                     options={{
                         title: 'Update Bank Inventory',
+                    }}
+                />
+                <Stack.Screen
+                    name="Inbox"
+                    component={Messages}
+                    options={{
+                        title: 'Inbox',
+                    }}
+                />
+                <Stack.Screen
+                    name="Register"
+                    component={Register}
+                    options={{
+                        title: 'Register',
                     }}
                 />
 

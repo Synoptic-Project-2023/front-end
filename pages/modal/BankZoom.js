@@ -4,27 +4,32 @@ import { View, Text, StyleSheet, ScrollView, FlatList } from 'react-native';
 import Filter from './ui/Filter';
 
 export default function BankZoom(props) {
+	const updatedAtDate = new Date(props.bank.updatedAt).toDateString();
 
 	function getFilters(filters) {
 
 		var components = [];
+		/**
+			@todo: fix this
+		**/
+		console.log(filters);
+		if(filters){
+			for (let i = 0; i < filters.length; i++) {
 
-		for (let i = 0; i < filters.length; i++) {
+				if (filters[i]) {
 
-			if (filters[i]) {
+					components.push(
 
-				components.push(
-
-					<Filter
-						key={i}
-						index={i}
-						gotoFilteredList={props.gotoFilteredList}
-						filters={props.filters}
-					/>
-				);
+						<Filter
+							key={i}
+							index={i}
+							gotoFilteredList={props.gotoFilteredList}
+							filters={props.filters}
+						/>
+					);
+				}
 			}
 		}
-
 		return components;
 	}
 
@@ -33,14 +38,14 @@ export default function BankZoom(props) {
 		<View
 			style={[props.style, styles.view]}
 		>
-			<Text style={styles.bankName}>{props.bank.name}</Text>
-			<Text style={styles.date}>Last updated: {props.bank.lastUpdated.toDateString()}</Text>
+			<Text style={styles.bankName}>{props.bank.bankName}</Text>
+			<Text style={styles.date}>Last updated: {updatedAtDate}</Text>
 
 			<View style={styles.scrollViewView}>
 				<ScrollView
 					contentContainerStyle={styles.scrollView}
 				>
-					{ getFilters(props.bank.filters) }
+					{ getFilters([props.bank.vegan, props.bank.vegetarian, props.bank.halal, props.bank.kosher]) }
 				</ScrollView>
 			</View>
 		</View>

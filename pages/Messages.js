@@ -1,88 +1,94 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Pressable } from 'react-native';
 import { View, StyleSheet, Text } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import Banks from '../api/Banks';
 import MenuButton from './modal/ui/MenuButton';
 
-export default function Messages({ navigation }, props) {
+export default function Messages({ navigation, route }, props) {
 
 	const [messageList, setMessageList] = useState([]);
 	const [selectedMessageIndex, setselectedMessageIndex] = useState(-1);
 	const [selected, setSelected] = useState(false);
 	const [accept, setAccept] = useState(false);
 	const [decline, setDecline] = useState(false);
+	const [messageUser, setMessageUser] = useState([]);
 
-	function handleMessages() {
+	const {API_BASE} = route.params;
 
-		setMessageList([
-			{
-				"_id": "64850c81b76ebf3e933df752",
-				"title": "yuck",
-				"description": "suck",
-				"senderId": "647e4f57c4c3e2d33179df25",
-				"recieverId": "647e4f57c4c3e2d33179df25",
-				"toLevel": "luck",
-				"creationDate": "2023-06-10T23:51:26.527Z",
-				"__v": 0
-			},
-			{
-				"_id": "648513fc77f90c98d5890ed8",
-				"title": "Elevate privilidges request",
-				"description": "for Glasgow South West Foodbank",
-				"senderId": "647e4f57c4c3e2d33179df25",
-				"recieverId": "6483bcca47bb9094aca0d017",
-				"toLevel": "volunteer",
-				"creationDate": "2023-06-11T00:21:13.989Z",
-				"__v": 0
-			},
-			{
-				"_id": "648515f077f90c98d5890ee6",
-				"title": "Elevate privilidges request",
-				"description": "for Edinburgh Central Foodbank",
-				"senderId": "647e4f57c4c3e2d33179df25",
-				"recieverId": "6483bcdc47bb9094aca0d019",
-				"toLevel": "volunteer",
-				"creationDate": "2023-06-11T00:21:13.989Z",
-				"__v": 0
-			}
-		])
+	useEffect(() => {
+		handleMessages();
+	}, []);
+
+	async function handleMessages() {
+		const response = await fetch(API_BASE + '/messages')
+		const data = await response.json()
+		setMessageList(data)
 	}
 
-	if (messageList.length <= 0) handleMessages();
-
 	function getMessageTitles(messages) {
+		return messages.map((message) => (message.title + ' ' + message.description));
+	}
 
-		var titles = [];
+	async function fetchSelectedMessageIndex(index){
+		setselectedMessageIndex(index);
+		
+		const response = await fetch(API_BASE + '/user/' + messageList[index].senderId)
+		const data = await response.json()
+		setMessageUser(data)
 
-		for (var i = 0; i < messages.length; i++) {
-
-			titles.push(messages[i].title);
-		}
-
-		return titles;
 	}
 
 	function prepareMessage(index) {
 
 		setAccept(false);
 		setDecline(false);
-		setselectedMessageIndex(index);
+		fetchSelectedMessageIndex(index);
 		setSelected(true);
 	}
 
-	function setResult(accepted) {
+	async function deleteMessage(){
+		await fetch(API_BASE + "/user/message/" + messageList[selectedMessageIndex]._id, {
+			method: 'DELETE'
+			}).then((response) => {
+				if(response.ok){
+					console.log("deleted message")
+				} else {
+					console.log("error deleting")
+				}
+			})
+		handleMessages();
+	}
 
+	async function setResult(accepted) {
+		var index = selectedMessageIndex;
 		if (accepted) {
-
+			const userPrivs = {
+				"access" : messageList[index].toLevel,
+				"banks" : messageList[index].recieverId
+			}
+			fetch(API_BASE + "/user/" + messageList[index].senderId + "/update", {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(userPrivs)
+			}).then((response) => {
+				if(response.ok){
+					console.log("updated")
+				} else {
+					console.log("error updating")
+				}
+			}).catch((e) => {
+				console.log("Network error", e)
+			})
 			setAccept(true);
 		}
 		else {
-
 			setDecline(true);
 		}
-
+		await deleteMessage();
 		setSelected(false);
 	}
 
@@ -101,8 +107,8 @@ export default function Messages({ navigation }, props) {
 					<Text style={styles.description}>{message.description}{'\n'}</Text>
 
 					<Text style={styles.label}>From:</Text>
-					<Text style={styles.description}>Placeholder Name</Text>
-					<Text style={styles.date}>Email: Placeholder Email</Text>
+					<Text style={styles.description}>{messageUser.username}</Text>
+					<Text style={styles.date}>{messageUser.email}</Text>
 					<Text style={styles.date}>ID: {message.senderId}{'\n'}</Text>
 
 					<Text style={styles.label}>Sent:</Text>

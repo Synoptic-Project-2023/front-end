@@ -6,11 +6,13 @@ import SelectDropdown from 'react-native-select-dropdown'
 import Banks from '../api/Banks';
 import MenuButton from './modal/ui/MenuButton';
 
-export default function Request({ navigation }, props) {
+export default function Request({ navigation, route }) {
 
 	const [selectedBankIndex, setSelectedBankIndex] = useState(-1);
 	const [selected, setSelected] = useState(false);
 	const [requested, setRequested] = useState(false);
+
+	const { banks, currentUser, API_BASE } = route.params;
 
 	function getBankNames(banks) {
 
@@ -18,9 +20,9 @@ export default function Request({ navigation }, props) {
 
 		for (var i = 0; i < banks.length; i++) {
 
-			names.push(banks[i].name);
+			names.push(banks[i].bankName);
 		}
-
+		console.log(names)
 		return names;
 	}
 
@@ -30,9 +32,39 @@ export default function Request({ navigation }, props) {
 		setSelected(true);
 	}
 
-	function sendRequest(index) {
+	function getNextLevel(){
+		switch(currentUser.access){
+			case "user":
+				return "volunteer"
+			case "volunteer":
+				return "admin"
+			default:
+				return "user"
+		}
+	}
 
-		console.log("hello");
+	async function sendRequest(index) {
+
+		console.log("here")
+		const data = {
+			title: "Elevate privilidges request",
+			description : "for " + banks[index].bankName,
+			toLevel: getNextLevel(),
+			recieverName: banks[index].bankName
+		}
+		const response = await fetch(API_BASE + '/user/' + currentUser._id + "/message", {
+			method: 'POST',
+			headers: {
+				'Content-Type' : 'application/json'
+			},
+			body: JSON.stringify(data)
+		});
+		if (!response.ok){
+			console.log("message failed to send")
+			return;
+		}
+
+		console.log("success")
 
 		setRequested(true);
 	}
@@ -44,7 +76,7 @@ export default function Request({ navigation }, props) {
 			return (
 				<View>
 					<Text style={styles.message}>
-						A request has been sent to us for '{banks[selectedBankIndex].name}' and you will get an email
+						A request has been sent to us for '{banks[selectedBankIndex].bankName}' and you will get an email
 						if you have been approved!
 					</Text>
 				</View>
@@ -66,7 +98,7 @@ export default function Request({ navigation }, props) {
 				buttonStyle={styles.dropdown}
 				buttonTextStyle={styles.buttonText}
 				search={true}
-				data={getBankNames(Banks)}
+				data={getBankNames(banks)}
 
 				onSelect={(selectedItem, index) => {
 
@@ -80,7 +112,7 @@ export default function Request({ navigation }, props) {
 				enabled={selected}
 			/>
 
-			{ getMessage(Banks) }
+			{ getMessage(banks) }
 		</View>
 	)
 }

@@ -4,13 +4,14 @@ import { Pressable } from 'react-native';
 import { View, StyleSheet, Text } from 'react-native';
 import MenuButton from './modal/ui/MenuButton';
 
-export default function Profile({ navigation }, props) {
+export default function Profile({ navigation, route }) {
 
-	function logOut() {
-
-		// TODO
+	const { currentUser, logOut, banks, API_BASE } = route.params;
+	
+	function handleLogOut(){
+		logOut();
+		navigation.navigate('Map')
 	}
-
 	return (
 
 		<View style={styles.view}>
@@ -18,17 +19,17 @@ export default function Profile({ navigation }, props) {
 			<Text
 				style={styles.title}
 			>
-				Hello,{'\n'}Placeholder{'\n'}
+				Hello, {currentUser.username}{'\n'}
 			</Text>
 
 			<MenuButton
 				text={'Request Volunteer Access'}
-				onPress={() => navigation.navigate('Request')}
+				onPress={() => navigation.navigate('Request', { banks, currentUser, API_BASE })}
 			/>
 
 			<MenuButton
 				text={'Log Out'}
-				onPress={logOut}
+				onPress={() => handleLogOut()}
 			/>
 
 		</View>
