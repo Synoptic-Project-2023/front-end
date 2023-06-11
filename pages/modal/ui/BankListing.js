@@ -10,6 +10,8 @@ export default function BankListing(props) {
 	function getFilters(filters) {
 
 		var components = [];
+		if(filters){
+			for (let i = 0; i < filters.length; i++) {
 
 		console.log(filters);
 
@@ -27,7 +29,6 @@ export default function BankListing(props) {
 				/>
 			);
 		}
-
 		return components;
 	}
 
@@ -40,10 +41,10 @@ export default function BankListing(props) {
 			downColor='rgb(210, 230, 255)'
 			style={styles.listButton}
 		>
-			<Text style={styles.name}>{props.bank.name}</Text>
+			<Text style={styles.name}>{props.bank.bankName}</Text>
 
 			<View style={styles.circleView}>
-				{getFilters(props.bank.filters)}
+				{getFilters([props.bank.kosher, props.bank.halal, props.bank.vegan, props.bank.vegetarian])}
 				<Text style={styles.away}>0.0m</Text>
 			</View>
 		</ListButton>

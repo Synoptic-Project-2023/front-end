@@ -16,7 +16,7 @@ export default function Filter(props) {
 		else
 			return () => props.gotoFilteredList(props.index);
 	}
-
+	
 	return (
 
 		<ListButton
@@ -33,6 +33,7 @@ export default function Filter(props) {
 					: props.colours[props.index]
 			}]}>
 			</View>
+
 			<Text style={styles.name}>{props.filters[props.index]}</Text>
 		</ListButton>
 	)

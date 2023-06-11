@@ -6,34 +6,32 @@ import MenuButton from './modal/ui/MenuButton';
 
 export default function Profile({ navigation, route }, props) {
 	
-	const { currentUser, logIn, API_BASE } = route.params;
+	const { API_BASE } = route.params;
 
 	const[email, setEmail] = React.useState([]);
 	const[password, setPassword] = React.useState([]);
+  const[username, setUsername] = React.useState([]);
 
-	function handleLogIn(){
-		const loginData = {
+	function handleRegistration(){
+		const registerData = {
 			email,
-			password
+			password,
+      username
 		}
-		fetch(API_BASE + '/user/login', {
+		fetch(API_BASE + '/user/register', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify(loginData)
+			body: JSON.stringify(registerData) 
 		}).then(
 			res => res.json()
 		).then(
 			data => {
-				logIn(data._id)
-				navigation.navigate('Map')
+				console.log(data._id)
+				navigation.goBack()
 			}
 		).catch(e => { console.log(e) })
-	}
-
-	function openRegister(){
-		navigation.navigate('Register', {API_BASE})
 	}
 
 
@@ -53,6 +51,18 @@ export default function Profile({ navigation, route }, props) {
 				onChangeText={setEmail}
 			/>
 
+      
+			<Text
+				style={styles.label}
+			>
+				Your Name
+			</Text>
+
+			<TextInput
+				style={styles.input}
+				placeholder="Jeff Geofferson"
+				onChangeText={setUsername}
+			/>
 
 			<Text
 				style={styles.label}
@@ -67,19 +77,8 @@ export default function Profile({ navigation, route }, props) {
 			/>
 
 			<MenuButton
-				text={'Log in'}
-				onPress={() => handleLogIn()}
-			/>
-
-			<Text
-				style={styles.label}
-			>
-				Don't have an account?
-			</Text>
-
-		<MenuButton
 				text={'Register'}
-				onPress={() => openRegister()}
+				onPress={() => handleRegistration()}
 			/>
 		</View>
 	)

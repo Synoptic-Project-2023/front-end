@@ -13,8 +13,9 @@ export default function BankList(props) {
         var components = [];
 
         for (let i = 0; i < banks.length; i++) {
-
-            if (filterIndex == undefined || banks[i].filters[filterIndex]) {
+            console.log(banks[i])
+            var currentBankFilters = [banks[i].kosher, banks[i].halal, banks[i].vegan, banks[i].vegetarian]
+            if (filterIndex == undefined || currentBankFilters[filterIndex]) {
 
                 components.push(
 
@@ -51,7 +52,7 @@ export default function BankList(props) {
 
             <OptionsBar
                 texts={["Filters", "Sort By"]}
-                functions={[undefined, props.gotoFilterList]}
+                functions={[props.gotoFilterList, undefined]}
                 style={styles.optionsBar}
                 fontSize={20}
                 margin={5}
