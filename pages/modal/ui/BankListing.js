@@ -10,9 +10,6 @@ export default function BankListing(props) {
 	function getFilters(filters) {
 
 		var components = [];
-		if(filters){
-			for (let i = 0; i < filters.length; i++) {
-
 		console.log(filters);
 
 		for (let i = 0; i < filters.length; i++) {
