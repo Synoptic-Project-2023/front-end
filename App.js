@@ -4,13 +4,13 @@ import { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import MapScreen from './pages/MapScreen';
-import Login from './pages/Login';
-import Profile from './pages/Profile';
-import Request from './pages/Request'
-import UpdateBank from './pages/UpdateBank';
-import Messages from './pages/Messages'
-import Register from './pages/Register'
+const MapScreen = React.lazy(() => import('./pages/MapScreen'));
+const Login = React.lazy(() => import('./pages/Login'));
+const Profile = React.lazy(() => import('./pages/Profile'));
+const Request = React.lazy(() => import('./pages/Request'));
+const UpdateBank = React.lazy(() => import('./pages/UpdateBank'));
+const Messages = React.lazy(() => import('./pages/Messages'));
+const Register = React.lazy(() => import('./pages/Register'));
 
 const Stack = createNativeStackNavigator();
 
