@@ -35,7 +35,8 @@ export default function Circle(props) {
 				},
 					props.style
 				]}
-			/>
+			>
+			</View>
 		)
 	}
 }

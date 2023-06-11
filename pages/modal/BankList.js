@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { StyleSheet, Button, Pressable, Modal, Text, View, ScrollView } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps';
+import FilterColours from '../../api/FilterColours';
 import BankListing from './ui/BankListing';
 import OptionsBar from './ui/OptionsBar';
 
@@ -20,18 +21,14 @@ export default function BankList(props) {
 
                     <BankListing bank={banks[i]}
                         focusBank={props.focusBank}
-                        key = {i + 'banklist'}
+                        key={i + 'banklist'}
+                        colours={FilterColours}
                     />
                 );
             }
         }
 
         return components;
-    }
-
-    function helloWorld() {
-
-        console.log("Hello world!")
     }
 
     return (
@@ -55,7 +52,7 @@ export default function BankList(props) {
 
             <OptionsBar
                 texts={["Filters", "Sort By"]}
-                functions={[props.gotoFilterList, helloWorld]}
+                functions={[props.gotoFilterList, undefined]}
                 style={styles.optionsBar}
                 fontSize={20}
                 margin={5}
