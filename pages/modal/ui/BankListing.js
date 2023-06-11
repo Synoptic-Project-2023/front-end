@@ -3,6 +3,7 @@ import * as React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Circle from './Circle';
 import ListButton from './ListButton';
+import FilterColours from '../../../api/FilterColours';
 
 export default function BankListing(props) {
 
@@ -10,10 +11,20 @@ export default function BankListing(props) {
 
 		var components = [];
 
+		console.log(filters);
+
 		for (let i = 0; i < filters.length; i++) {
 
 			if (filters[i]) components.push(
-				<Circle radius={16} style={styles.circle} key = {i+'circle'} />
+
+				<Circle radius={16} style={[styles.circle, {
+
+					backgroundColor: props.colours == undefined
+						? FilterColours[i]
+						: props.colours[i]
+				}]}
+					key={i + 'circle'}
+				/>
 			);
 		}
 

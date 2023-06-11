@@ -1,6 +1,7 @@
 
 import * as React from 'react';
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import FilterColours from '../../../api/FilterColours';
 import ListButton from './ListButton';
 
 export default function Filter(props) {
@@ -25,7 +26,13 @@ export default function Filter(props) {
 			downColor='rgb(210, 230, 255)'
 			onPress={getOnPress(customOnPress)}
 		>
-			<View style={styles.circle}></View>
+			<View style={[styles.circle, {
+
+				backgroundColor: props.colours == undefined
+					? FilterColours[props.index]
+					: props.colours[props.index]
+			}]}>
+			</View>
 			<Text style={styles.name}>{props.filters[props.index]}</Text>
 		</ListButton>
 	)
@@ -52,7 +59,6 @@ const styles = StyleSheet.create({
 		width: 24,
 		height: 24,
 		borderRadius: 100,
-		backgroundColor: 'blue',
 	},
 
 	name: {
