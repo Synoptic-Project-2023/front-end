@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Pressable } from 'react-native';
 import { View, StyleSheet, Text } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
@@ -17,13 +17,15 @@ export default function Messages({ navigation, route }, props) {
 
 	const {API_BASE} = route.params;
 
+	useEffect(() => {
+		handleMessages();
+	}, []);
+
 	async function handleMessages() {
 		const response = await fetch(API_BASE + '/messages')
 		const data = await response.json()
 		setMessageList(data)
 	}
-
-	if (messageList.length <= 0) handleMessages();
 
 	function getMessageTitles(messages) {
 		return messages.map((message) => (message.title + ' ' + message.description));
