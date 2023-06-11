@@ -27,7 +27,7 @@ export default function MapScreen({ navigation }) {
     const [banks, setBanksList] = useState([]);
     const [filterIndex, setFilterIndex] = useState(undefined);
 
-    var userId = "647e4f57c4c3e2d33179df25"
+    var userId = ""
     
     function focusBank(bank) {
 
