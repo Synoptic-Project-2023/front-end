@@ -18,10 +18,12 @@ export default function MenuButton(props) {
 								padding: 10,
 								marginBottom: 10,
 								marginTop: 10,
-								backgroundColor: '#1a73e8',
+								backgroundColor: props.bad == true ? '#f45269' : '#1a73e8',
 							},
 
-							pressed ? { backgroundColor: '#4285f4' } : { backgroundColor: '#1a73e8' },
+							pressed
+								? { backgroundColor: props.bad == true ? '#f66f83' : '#4285f4' }
+								: { backgroundColor: props.bad == true ? '#f45269' : '#1a73e8' },
 						]}
 					onPress={props.onPress}
 				>

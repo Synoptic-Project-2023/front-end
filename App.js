@@ -9,7 +9,7 @@ import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Request from './pages/Request'
 import UpdateBank from './pages/UpdateBank';
-import Inbox from './pages/Inbox'
+import Messages from './pages/Messages'
 import Register from './pages/Register'
 
 const Stack = createNativeStackNavigator();
@@ -57,7 +57,7 @@ export default function App({ navigation }) {
                 />
                 <Stack.Screen
                     name="Inbox"
-                    component={Inbox}
+                    component={Messages}
                     options={{
                         title: 'Inbox',
                     }}
