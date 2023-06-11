@@ -19,7 +19,7 @@ export default function UpdateBank({ route }) {
     const [selectedFilters, setSelectedFilters] = useState([]);
 	const [userBanks, setUserBanks] = useState([])
 
-    const { banks, userId } = route.params;
+    const { banks, currentUser } = route.params;
 
     useEffect(() => {
         fetchBanks();
@@ -27,7 +27,8 @@ export default function UpdateBank({ route }) {
 
 	async function fetchBanks() {
 		try {
-			const response = await fetch(API_BASE + `/user/${userId}/foodbanks`);
+			if(!currentUser._id){return;}
+			const response = await fetch(API_BASE + '/user/'+ currentUser._id +'/foodbanks');
 			const data = await response.json();
 			setUserBanks(data);
 			setRemainingFilters(initialiseRemainingFilters(Filters.length));

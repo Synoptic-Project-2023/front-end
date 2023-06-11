@@ -14,6 +14,8 @@ import ListButton from './modal/ui/ListButton';
 
 const API_BASE = 'http://localhost:3001/api'
 
+
+
 export default function MapScreen({ navigation }) {
 
     const mapRef = React.createRef();
@@ -22,10 +24,13 @@ export default function MapScreen({ navigation }) {
     const [pageName, setPageName] = useState("bankList");
     const [location, setLocation] = useState(Banks[1].location);
     const [focusedBank, setFocusedBank] = useState(Banks[1]);
+    const [loggedIn, setLoggedIn] = useState([])
+    const [currentUser, setCurrentUser] = useState([])
     const [banks, setBanksList] = useState([]);
     const [filterIndex, setFilterIndex] = useState(undefined);
-    const userId = "647e4f57c4c3e2d33179df25"
 
+    var userId = "647e4f57c4c3e2d33179df25"
+    
     function focusBank(bank) {
 
         setFocusedBank(bank);
@@ -37,8 +42,38 @@ export default function MapScreen({ navigation }) {
     }
 
     useEffect(() => {
-        fetchBanksList;
+
+        fetchBanksList();
+        checkLoggedIn();
+        
     }, []);
+
+    async function logIn(newId){
+        userId = newId;
+        await checkLoggedIn();
+    }
+
+    function logOut(){
+        userId = ''
+        checkLoggedIn();
+    }
+
+    async function checkLoggedIn(){
+        if(userId){
+            try{
+                const response = await fetch(API_BASE + '/user/' + userId)
+                const data = await response.json()
+                setCurrentUser(data)
+                if(data){ setLoggedIn('Profile') } else { setLoggedIn('Login'); setCurrentUser([]) }
+                console.log(currentUser)
+            } catch (e){
+                console.log(e)
+            }
+        } else{
+            setLoggedIn('Login')
+            setCurrentUser([])
+        }
+    }
 
     function getModalPage(pageName) {
 
@@ -83,7 +118,7 @@ export default function MapScreen({ navigation }) {
         try{
             const response = await fetch(API_BASE + '/foodbank')
             const data = await response.json()
-            await setBanksList(data);
+            setBanksList(data);
             console.log(banks)
         } catch (e){
             console.log(e)
@@ -92,7 +127,7 @@ export default function MapScreen({ navigation }) {
 
     async function enableDisplayModal(pageName, filterIndex = undefined) {
 
-        await fetchBanksList();
+        fetchBanksList();
         setPageName(pageName);
         setDisplayModal(true);
         setFilterIndex(filterIndex);
@@ -149,8 +184,8 @@ export default function MapScreen({ navigation }) {
             </View>
 
             <BurgerButton text="☰" index="0" />
-            <BurgerButton text="👤" index="1" onPress={() => navigation.navigate('Profile')} />
-            <BurgerButton text="🏦" index="2" onPress={() => navigation.navigate('UpdateBank', { banks, userId })} />
+            <BurgerButton text="👤" index="1" onPress={() => navigation.navigate(loggedIn, { currentUser, logOut, logIn, API_BASE, banks})} />
+            <BurgerButton text="🏦" index="2" onPress={() => navigation.navigate('UpdateBank', { banks, currentUser })} />
 
             <Modal
                 // Modal //
