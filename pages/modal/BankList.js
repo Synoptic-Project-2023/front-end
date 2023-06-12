@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import FilterColours from '../../api/FilterColours';
 import BankListing from './ui/BankListing';
 import OptionsBar from './ui/OptionsBar';
-import Geolocation from '@react-native-community/geolocation';
 
 export default function BankList(props) {
 
