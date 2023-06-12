@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
         ...StyleSheet.absoluteFillObject,
         marginLeft: "5%",
         marginRight: "5%",
-        marginBottom: 140,
+        marginBottom: 100,
         marginTop: 130,
         bottom: "55%",
 	},

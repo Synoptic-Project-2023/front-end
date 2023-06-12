@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
         marginLeft: "5%",
         marginRight: "5%",
         marginBottom: 140,
-        marginTop: 130,
+        marginTop: 90,
         bottom: "55%",
 	},
 

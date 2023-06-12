@@ -208,7 +208,7 @@ export default function MapScreen({ navigation }) {
             {(currentUser.access === 'admin') &&
                 <BurgerButton text="✉️" index="3" onPress={() => navigation.navigate('Inbox', { banks, currentUser, API_BASE })} />
             }
-
+            
             <Modal
                 // Modal //
                 animationType="slide"
