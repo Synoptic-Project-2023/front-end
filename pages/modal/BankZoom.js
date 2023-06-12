@@ -45,7 +45,7 @@ export default function BankZoom(props) {
 				<ScrollView
 					contentContainerStyle={styles.scrollView}
 				>
-					{ getFilters([props.bank.vegan, props.bank.vegetarian, props.bank.halal, props.bank.kosher]) }
+					{ getFilters([props.bank.kosher, props.bank.halal, props.bank.vegan, props.bank.vegetarian]) }
 				</ScrollView>
 			</View>
 		</View>
