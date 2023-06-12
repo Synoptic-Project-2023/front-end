@@ -11,7 +11,7 @@ import BankZoom from './modal/BankZoom';
 import FilterList from './modal/FilterList';
 import BurgerButton from './modal/ui/BurgerButton';
 import ListButton from './modal/ui/ListButton';
-import Geolocation from '@react-native-community/geolocation';
+import * as Location from 'expo-location';
 
 export default function MapScreen({ navigation }) {
 
@@ -27,14 +27,11 @@ export default function MapScreen({ navigation }) {
     const [filterIndex, setFilterIndex] = useState(undefined);
 
     const [currentLocation, setCurrentLocation] = useState({
-
         latitude: 1,
         longitude: 1,
         latitudeDelta: 0.001,
         longitudeDelta: 0.001,
     });
-
-    Geolocation.getCurrentPosition(info => { setCurrentLocation(info.coords) });
 
     var userId = ""
     
@@ -48,8 +45,20 @@ export default function MapScreen({ navigation }) {
         mapRef.current.animateToRegion(bank.location);
     }
 
+    async function getLocationAsync() {
+        let {status} = await Location.requestForegroundPermissionsAsync();
+        if (status !== 'granted') {
+            console.log("failed to obatin location")
+            return;
+        }
+
+        let location = await Location.getCurrentPositionAsync({});
+        setCurrentLocation(location.coords);
+    }
+
     useEffect(() => {
 
+        getLocationAsync();
         fetchBanksList();
         checkLoggedIn();
         
