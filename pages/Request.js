@@ -38,6 +38,8 @@ export default function Request({ navigation, route }) {
 				return "volunteer"
 			case "volunteer":
 				return "admin"
+			case "admin":
+				return "admin"
 			default:
 				return "user"
 		}
