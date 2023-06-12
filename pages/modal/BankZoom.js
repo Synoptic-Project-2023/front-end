@@ -2,8 +2,10 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, ScrollView, FlatList } from 'react-native';
 import Filter from './ui/Filter';
+import { useTranslation } from 'react-i18next';
 
 export default function BankZoom(props) {
+	const { t } = useTranslation();
 	const updatedAtDate = new Date(props.bank.updatedAt).toDateString();
 
 	function getFilters(filters) {
@@ -39,7 +41,7 @@ export default function BankZoom(props) {
 			style={[props.style, styles.view]}
 		>
 			<Text style={styles.bankName}>{props.bank.bankName}</Text>
-			<Text style={styles.date}>Last updated: {updatedAtDate}</Text>
+			<Text style={styles.date}>{t("last updated")} {updatedAtDate}</Text>
 
 			<View style={styles.scrollViewView}>
 				<ScrollView
@@ -56,7 +58,7 @@ const styles = StyleSheet.create({
 
 	view: {
 
-		top: "30%"
+		top: "60%"
 	},
 
 	bankName: {
@@ -83,9 +85,9 @@ const styles = StyleSheet.create({
         ...StyleSheet.absoluteFillObject,
         marginLeft: "5%",
         marginRight: "5%",
-        marginBottom: 150,
-        marginTop: 110,
-        bottom: "25%",
+        marginBottom: 140,
+        marginTop: 130,
+        bottom: "55%",
 	},
 
 	scrollView: {
