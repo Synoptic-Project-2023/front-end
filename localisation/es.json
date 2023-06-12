@@ -20,7 +20,7 @@
     "select an option": "Seleccionar una opción",
     "request access": "Solicitar acceso",
     "request sent": "Se ha enviado una solicitud para",
-    "approval notification": "y recibirás un correo electrónico si has sido aprobado/a",
+    "approval notification": "y recibirás un correo electrónico si has sido aprobado",
     "log out": "Cerrar sesión",
     "inbox": "Bandeja de entrada",
     "select message": "Seleccionar mensaje",
@@ -36,5 +36,6 @@
     "selected": "Seleccionado",
     "update": "Actualizar",
     "with": " con ",
-    "last updated": "Última actualización: "
+    "last updated": "Última actualización: ",
+    "your name": "Su nombre"
 }
