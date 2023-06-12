@@ -13,6 +13,8 @@ import Request from './pages/Request';
 import UpdateBank from './pages/UpdateBank';
 import Messages from './pages/Messages';
 import Register from './pages/Register';
+import CitizensAdvice from './pages/CitizensAdvice';
+
 import LanguageButton from './pages/modal/ui/LanguageButton';
 
 const Stack = createNativeStackNavigator();
@@ -76,6 +78,13 @@ export default function App({ navigation }) {
                         component={Register}
                         options={{
                             title: i18n.t('register'),
+                        }}
+                    />
+                    <Stack.Screen
+                        name="CitizensAdvice"
+                        component={CitizensAdvice}
+                        options={{
+                            title: i18n.t('citizens advice'),
                         }}
                     />
 

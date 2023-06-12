@@ -200,7 +200,7 @@ export default function MapScreen({ navigation }) {
                 </ListButton>
             </View>
 
-            <BurgerButton text="☰" index="0" />
+            <BurgerButton text="❓" index="0" onPress={() => navigation.navigate('CitizensAdvice')}/>
             <BurgerButton text="👤" index="1" onPress={() => navigation.navigate(loggedIn, { currentUser, logOut, logIn, API_BASE, banks})} />
             {(currentUser.access === 'volunteer' || currentUser.access === 'admin') &&
                 <BurgerButton text="🏦" index="2" onPress={() => navigation.navigate('UpdateBank', { banks, currentUser, API_BASE })} />
