@@ -3,9 +3,10 @@ import * as React from 'react';
 import { Pressable } from 'react-native';
 import { View, StyleSheet, Text } from 'react-native';
 import MenuButton from './modal/ui/MenuButton';
+import { useTranslation } from 'react-i18next';
 
 export default function Profile({ navigation, route }) {
-
+	const { t } = useTranslation();
 	const { currentUser, logOut, banks, API_BASE } = route.params;
 	
 	function handleLogOut(){
@@ -19,16 +20,16 @@ export default function Profile({ navigation, route }) {
 			<Text
 				style={styles.title}
 			>
-				Hello, {currentUser.username}{'\n'}
+				{t('hello')}, {currentUser.username}{'\n'}
 			</Text>
 
 			<MenuButton
-				text={'Request Volunteer Access'}
+				text={t('request volunteer access')}
 				onPress={() => navigation.navigate('Request', { banks, currentUser, API_BASE })}
 			/>
 
 			<MenuButton
-				text={'Log Out'}
+				text={t('log out')}
 				onPress={() => handleLogOut()}
 			/>
 

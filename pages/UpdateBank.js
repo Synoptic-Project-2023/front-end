@@ -7,9 +7,10 @@ import Banks from '../api/Banks';
 import Filters from '../api/Filters';
 import Filter from './modal/ui/Filter';
 import MenuButton from './modal/ui/MenuButton';
+import { useTranslation } from 'react-i18next';
 
 export default function UpdateBank({ route }) {
-
+	const { t } = useTranslation();
     const [selectedBankIndex, setSelectedBankIndex] = useState(-1);
     const [selected, setSelected] = useState(false);
     const [requested, setRequested] = useState(false);
@@ -66,8 +67,7 @@ export default function UpdateBank({ route }) {
 			return (
 				<View>
 					<Text style={styles.message}>
-						A request has been sent to us for '{banks[selectedBankIndex].name}' and you will get an email
-						if you have been approved!
+						{t('request sent')} '{banks[selectedBankIndex].bankName}' {t('approval notification')}
 					</Text>
 				</View>
 			)
@@ -133,10 +133,11 @@ export default function UpdateBank({ route }) {
 			<Text
 				style={styles.label}
 			>
-				Select Bank:
+				{t('select bank')}:
 			</Text>
 
 			<SelectDropdown
+				defaultButtonText={t('select an option')}
 				buttonStyle={styles.dropdown}
 				buttonTextStyle={styles.buttonText}
 				search={true}
@@ -165,7 +166,7 @@ export default function UpdateBank({ route }) {
 			/>
 
 
-			<Text style={styles.label}>Available Filters:</Text>
+			<Text style={styles.label}>{t('available filters')}:</Text>
 
 			<View style={styles.scrollViewView}>
 				<ScrollView
@@ -176,7 +177,7 @@ export default function UpdateBank({ route }) {
 			</View>
 
 
-			<Text style={styles.label}>Selected:</Text>
+			<Text style={styles.label}>{t('selected')}:</Text>
 
 			<View style={styles.scrollViewViewSelected}>
 				<ScrollView
@@ -189,7 +190,7 @@ export default function UpdateBank({ route }) {
 
 
 			<MenuButton
-				text={'Update'}
+				text={t('update')}
 				onPress={() => sendRequest()}
 			/>
 

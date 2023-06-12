@@ -5,8 +5,10 @@ import { View, StyleSheet, Text } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown'
 import Banks from '../api/Banks';
 import MenuButton from './modal/ui/MenuButton';
+import { useTranslation } from 'react-i18next';
 
 export default function Request({ navigation, route }) {
+	const { t } = useTranslation();
 
 	const [selectedBankIndex, setSelectedBankIndex] = useState(-1);
 	const [selected, setSelected] = useState(false);
@@ -78,8 +80,7 @@ export default function Request({ navigation, route }) {
 			return (
 				<View>
 					<Text style={styles.message}>
-						A request has been sent to us for '{banks[selectedBankIndex].bankName}' and you will get an email
-						if you have been approved!
+						{t('request sent')} '{banks[selectedBankIndex].bankName}' {t('approval notification')}
 					</Text>
 				</View>
 			)
@@ -93,10 +94,11 @@ export default function Request({ navigation, route }) {
 			<Text
 				style={styles.label}
 			>
-				Select Bank:
+				{t('select bank')}
 			</Text>
 
 			<SelectDropdown
+				defaultButtonText={t('select an option')}
 				buttonStyle={styles.dropdown}
 				buttonTextStyle={styles.buttonText}
 				search={true}
@@ -109,7 +111,7 @@ export default function Request({ navigation, route }) {
 			/>
 
 			<MenuButton
-				text={'Request Access'}
+				text={t('request access')}
 				onPress={() => sendRequest(selectedBankIndex)}
 				enabled={selected}
 			/>
