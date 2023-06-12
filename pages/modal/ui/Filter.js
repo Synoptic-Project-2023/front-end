@@ -3,8 +3,10 @@ import * as React from 'react';
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import FilterColours from '../../../api/FilterColours';
 import ListButton from './ListButton';
+import { useTranslation } from 'react-i18next';
 
 export default function Filter(props) {
+	const { t } = useTranslation();
 
 	var customOnPress = props.gotoFilteredList == undefined;
 
@@ -34,7 +36,7 @@ export default function Filter(props) {
 			}]}>
 			</View>
 
-			<Text style={styles.name}>{props.filters[props.index]}</Text>
+			<Text style={styles.name}>{t(props.filters[props.index])}</Text>
 		</ListButton>
 	)
 }
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
 		borderRadius: 100,
 		backgroundColor: 'pink',
 		alignSelf: 'flex-start',
-		minWidth: 100,
+		minWidth: 150,
 		padding: 5,
 	},
 

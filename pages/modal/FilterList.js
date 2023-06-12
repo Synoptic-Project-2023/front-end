@@ -2,8 +2,10 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, ScrollView, FlatList } from 'react-native';
 import Filter from './ui/Filter';
+import { useTranslation } from 'react-i18next';
 
 export default function FilterList(props) {
+	const { t } = useTranslation();
 
 	function getFilters(filters) {
 
@@ -33,6 +35,7 @@ export default function FilterList(props) {
 		<View
 			style={[props.style, styles.view]}
 		>
+			<Text style={styles.bankName}>{t("filters")}</Text>
 			<View style={styles.scrollViewView}>
 				<ScrollView
 					contentContainerStyle={styles.scrollView}
@@ -48,7 +51,7 @@ const styles = StyleSheet.create({
 
 	view: {
 
-		top: "10%"
+		top: "60%"
 	},
 
 	bankName: {
@@ -75,9 +78,9 @@ const styles = StyleSheet.create({
         ...StyleSheet.absoluteFillObject,
         marginLeft: "5%",
         marginRight: "5%",
-        marginBottom: 150,
-        marginTop: 75,
-        bottom: "10%",
+        marginBottom: 140,
+        marginTop: 90,
+        bottom: "55%",
 	},
 
 	scrollView: {

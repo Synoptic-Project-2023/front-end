@@ -3,9 +3,10 @@ import * as React from 'react';
 import { TextInput } from 'react-native';
 import { View, StyleSheet, Text } from 'react-native';
 import MenuButton from './modal/ui/MenuButton';
+import { useTranslation } from 'react-i18next';
 
 export default function Profile({ navigation, route }, props) {
-	
+	const { t } = useTranslation();
 	const { currentUser, logIn, API_BASE } = route.params;
 
 	const[email, setEmail] = React.useState([]);
@@ -44,12 +45,13 @@ export default function Profile({ navigation, route }, props) {
 			<Text
 				style={styles.label}
 			>
-				Email
+				{t('email')}
 			</Text>
 
 			<TextInput
 				style={styles.input}
 				placeholder="example@gmail.com"
+				autoCapitalize='none'
 				onChangeText={setEmail}
 			/>
 
@@ -57,28 +59,30 @@ export default function Profile({ navigation, route }, props) {
 			<Text
 				style={styles.label}
 			>
-				Password
+				{t('password')}
 			</Text>
 
 			<TextInput
 				style={styles.input}
 				placeholder="password"
+				autoCapitalize='none'
+				secureTextEntry={true}
 				onChangeText={setPassword}
 			/>
 
 			<MenuButton
-				text={'Log in'}
+				text={t('log in')}
 				onPress={() => handleLogIn()}
 			/>
 
 			<Text
 				style={styles.label}
 			>
-				Don't have an account?
+				{t("don't have an account")}
 			</Text>
 
 		<MenuButton
-				text={'Register'}
+				text={t('register')}
 				onPress={() => openRegister()}
 			/>
 		</View>
