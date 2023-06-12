@@ -1,4 +1,5 @@
 {
+    "map": "Mapa",
     "banks": "Banco de comida",
     "filters": "Filtros",
     "kosher": "Kosher",
@@ -29,5 +30,10 @@
     "elevate to": "Elevar a",
     "message approved": "¡El mensaje ha sido aprobado!",
     "decline": "Rechazar",
-    "message declined": "El mensaje ha sido rechazado"
+    "message declined": "El mensaje ha sido rechazado",
+    "update bank inventory": "Actualizar inventario bancario",
+    "available filters": "Filtros disponibles",
+    "selected": "Seleccionado",
+    "update": "Actualizar",
+    "with": " con "
 }

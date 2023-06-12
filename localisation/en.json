@@ -1,4 +1,5 @@
 {
+    "map": "Map",
     "banks": "Banks",
     "filters": "Filters",
     "kosher": "Kosher",
@@ -29,5 +30,10 @@
     "elevate to": "Elevate to",
     "message approved": "The message has been approved!",
     "decline": "Decline",
-    "message declined": "The message has been declined"
+    "message declined": "The message has been declined",
+    "update bank inventory": "Update Bank Inventory",
+    "available filters": "Available Filters",
+    "selected": "Selected",
+    "update": "update",
+    "with": " with "
 }
