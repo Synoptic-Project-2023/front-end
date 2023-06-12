@@ -3,8 +3,10 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import FilterColours from '../../api/FilterColours';
 import BankListing from './ui/BankListing';
 import OptionsBar from './ui/OptionsBar';
+import { useTranslation } from 'react-i18next';
 
 export default function BankList(props) {
+    const { t } = useTranslation();
 
     function getBankListings(banks, filterIndex, currentLocation) {
 
@@ -62,7 +64,7 @@ export default function BankList(props) {
             <Text
                 style={styles.title}
             >
-                {"Banks" + (props.filterIndex != undefined ? " with "+ props.filters[props.filterIndex] : "")}
+                {t('banks') + (props.filterIndex != undefined ? t('with')+ props.filters[props.filterIndex] : "")}
             </Text>
             
             <View style={styles.scrollViewView}>
@@ -74,7 +76,7 @@ export default function BankList(props) {
             </View>
 
             <OptionsBar
-                texts={["Filters", "Sort By"]}
+                texts={[t('filters'), t('sort by')]}
                 functions={[props.gotoFilterList, undefined]}
                 style={styles.optionsBar}
                 fontSize={20}
