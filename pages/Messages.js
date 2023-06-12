@@ -5,9 +5,10 @@ import { View, StyleSheet, Text } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import Banks from '../api/Banks';
 import MenuButton from './modal/ui/MenuButton';
+import { useTranslation } from 'react-i18next';
 
 export default function Messages({ navigation, route }, props) {
-
+	const { t } = useTranslation();
 	const [messageList, setMessageList] = useState([]);
 	const [selectedMessageIndex, setselectedMessageIndex] = useState(-1);
 	const [selected, setSelected] = useState(false);
@@ -103,25 +104,25 @@ export default function Messages({ navigation, route }, props) {
 			return (
 
 				<View>
-					<Text style={styles.label}>Message:</Text>
+					<Text style={styles.label}>{t('message')}:</Text>
 					<Text style={styles.description}>{message.description}{'\n'}</Text>
 
-					<Text style={styles.label}>From:</Text>
+					<Text style={styles.label}>{t('from')}:</Text>
 					<Text style={styles.description}>{messageUser.username}</Text>
 					<Text style={styles.date}>{messageUser.email}</Text>
 					<Text style={styles.date}>ID: {message.senderId}{'\n'}</Text>
 
-					<Text style={styles.label}>Sent:</Text>
+					<Text style={styles.label}>{t('sent')}:</Text>
 					<Text style={styles.description}>{message.creationDate}{'\n'}</Text>
 
 					<MenuButton
-						text={'Elevate to ' + message.toLevel}
+						text={t('elevate to') + ' ' + message.toLevel}
 						onPress={() => setResult(true)}
 						enabled={selected}
 					/>
 
 					<MenuButton
-						text={'Decline'}
+						text={t('decline')}
 						onPress={() => setResult(false)}
 						enabled={selected}
 						bad={true}
@@ -138,7 +139,7 @@ export default function Messages({ navigation, route }, props) {
 			return (
 				<View>
 					<Text style={styles.message}>
-						The message has been approved!
+						{t('message approved')}
 					</Text>
 				</View>
 			)
@@ -148,7 +149,7 @@ export default function Messages({ navigation, route }, props) {
 			return (
 				<View>
 					<Text style={[styles.message, {color: '#f45269'}]}>
-						The message has been declined.
+						{t('message declined')}
 					</Text>
 				</View>
 			)
@@ -162,10 +163,11 @@ export default function Messages({ navigation, route }, props) {
 			<Text
 				style={styles.label}
 			>
-				Select Message:
+				{t('select message')}
 			</Text>
 
 			<SelectDropdown
+				defaultButtonText={t('select an option')}
 				buttonStyle={styles.dropdown}
 				buttonTextStyle={styles.buttonText}
 				search={true}
