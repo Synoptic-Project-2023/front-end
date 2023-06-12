@@ -13,9 +13,18 @@ const LanguageButton = () => {
 		setIsOpen(!isOpen);
 	};
 
+	const languageImages = {
+		en: require('./images/en.png'),
+		gbS: require('./images/gbS.png'),
+		gbW: require('./images/gbW.png'),
+		es: require('./images/es.png'),
+		de: require('./images/de.png'),
+		it: require('./images/it.png'),
+		fr: require('./images/fr.png'),
+	};
+
 	const getBackgroundImage = (languageCode) => {
-		const imagePath = `./images/${languageCode}.png`;
-		return require(`${imagePath}`);
+		return languageImages[languageCode];
 	};
 
 	const changeLanguage = (language) => {
@@ -34,7 +43,7 @@ const LanguageButton = () => {
 			
 			{isOpen && (
 				<View style={styles.dropdown}>
-					<TouchableOpacity  onPress={() => changeLanguage('en')} style={[styles.languageOption, styles.en]}>
+					<TouchableOpacity  onPress={() => changeLanguage('en')} style={[styles.languageOption]}>
 						<ImageBackground source={getBackgroundImage('en')} style={styles.languageOptionBackground}>
 							<Text style={styles.text}>🇬🇧</Text>
 						</ImageBackground>
@@ -95,14 +104,12 @@ const styles = StyleSheet.create({
 		backgroundColor: 'white',
 	},
 	button: {
-		padding: 10,
-		backgroundColor: '#FFFFFF',
-		borderColor: '#4A80F5',
-		borderRadius: 10,
-		borderWidth: 2
+		padding: 8,
+		maxHeight: 60,
 	},
 	languageOption: {
 		paddingVertical: 4,
+		maxHeight: 40,
 	},
 	languageOptionBackground: {
 		flex: 1,
