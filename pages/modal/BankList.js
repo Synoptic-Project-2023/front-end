@@ -1,34 +1,58 @@
 
-import { useState } from 'react';
-import { StyleSheet, Button, Pressable, Modal, Text, View, ScrollView } from 'react-native';
-import MapView, { Marker, Polyline } from 'react-native-maps';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import FilterColours from '../../api/FilterColours';
 import BankListing from './ui/BankListing';
 import OptionsBar from './ui/OptionsBar';
+import Geolocation from '@react-native-community/geolocation';
 
 export default function BankList(props) {
 
-    function getBankListings(banks, filterIndex) {
+    function getBankListings(banks, filterIndex, currentLocation) {
 
         var components = [];
 
         for (let i = 0; i < banks.length; i++) {
-            console.log(banks[i])
+
             var currentBankFilters = [banks[i].kosher, banks[i].halal, banks[i].vegan, banks[i].vegetarian]
+
             if (filterIndex == undefined || currentBankFilters[filterIndex]) {
 
                 components.push(
 
-                    <BankListing bank={banks[i]}
+                    <BankListing
+                        bank={banks[i]}
                         focusBank={props.focusBank}
                         key={i + 'banklist'}
                         colours={FilterColours}
+                        distance={getDistance(currentLocation, banks[i].location)}
                     />
                 );
             }
         }
 
         return components;
+    }
+
+    function getDistance(l1, l2) {
+
+        // function adapted from https://stackoverflow.com/questions/639695/how-to-convert-latitude-or-longitude-to-meters
+
+        var R = 6378.137; // Radius of earth in KM
+
+        var dLat = l2.latitude * Math.PI / 180 - l1.latitude * Math.PI / 180;
+        var dLon = l2.longitude * Math.PI / 180 - l1.longitude * Math.PI / 180;
+
+        var a
+            = Math.sin(dLat / 2)
+            * Math.sin(dLat / 2)
+            + Math.cos(l1.latitude * Math.PI / 180)
+            * Math.cos(l2.longitude * Math.PI / 180)
+            * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var d = R * c;
+
+        return Math.round(d * 1000 * 10) / 10; // meters
     }
 
     return (
@@ -46,7 +70,7 @@ export default function BankList(props) {
                 <ScrollView
                     style={styles.scrollView}
                 >
-                    {getBankListings(props.banks, props.filterIndex)}
+                    {getBankListings(props.banks, props.filterIndex, props.currentLocation)}
                 </ScrollView>
             </View>
 

@@ -19,3 +19,5 @@ web-build/
 .metro-health-check*
 /.vs/VSWorkspaceState.json
 .env
+/.env
+/.env

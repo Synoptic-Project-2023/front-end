@@ -11,8 +11,7 @@ import BankZoom from './modal/BankZoom';
 import FilterList from './modal/FilterList';
 import BurgerButton from './modal/ui/BurgerButton';
 import ListButton from './modal/ui/ListButton';
-
-
+import Geolocation from '@react-native-community/geolocation';
 
 export default function MapScreen({ navigation }) {
 
@@ -26,6 +25,16 @@ export default function MapScreen({ navigation }) {
     const [currentUser, setCurrentUser] = useState([])
     const [banks, setBanksList] = useState([]);
     const [filterIndex, setFilterIndex] = useState(undefined);
+
+    const [currentLocation, setCurrentLocation] = useState({
+
+        latitude: 1,
+        longitude: 1,
+        latitudeDelta: 0.001,
+        longitudeDelta: 0.001,
+    });
+
+    Geolocation.getCurrentPosition(info => { setCurrentLocation(info.coords) });
 
     var userId = ""
     
@@ -98,6 +107,7 @@ export default function MapScreen({ navigation }) {
                         filterIndex={filterIndex}
                         gotoFilterList={() => enableDisplayModal("filterList")}
                         filters={Filters}
+                        currentLocation={currentLocation}
                     />
                 );
 
@@ -228,6 +238,7 @@ export default function MapScreen({ navigation }) {
                 style={styles.map}
                 initialRegion={location}
                 ref={mapRef}
+                showsUserLocation={true}
                 mapPadding={{
                     bottom: 400,
                 }}

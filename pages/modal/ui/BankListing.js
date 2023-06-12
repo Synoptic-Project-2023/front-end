@@ -10,7 +10,6 @@ export default function BankListing(props) {
 	function getFilters(filters) {
 
 		var components = [];
-		console.log(filters);
 
 		for (let i = 0; i < filters.length; i++) {
 
@@ -40,9 +39,11 @@ export default function BankListing(props) {
 		>
 			<Text style={styles.name}>{props.bank.bankName}</Text>
 
-			<View style={styles.circleView}>
+			<View
+				style={styles.circleView}
+			>
 				{getFilters([props.bank.kosher, props.bank.halal, props.bank.vegan, props.bank.vegetarian])}
-				<Text style={styles.away}>0.0m</Text>
+				<Text style={styles.away}>{props.distance}m</Text>
 			</View>
 		</ListButton>
 	)
