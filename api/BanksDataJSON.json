@@ -1,0 +1,222 @@
+[
+    {
+        "location": {
+            "latitude": 55.9533,
+            "longitude": -3.1883,
+            "latitudeDelta": 0.01,
+            "longitudeDelta": 0.01
+        },
+        "_id": "6483bcdc47bb9094aca0d019",
+        "bankName": "Edinburgh Central Foodbank",
+        "description": "Food bank located in the heart of Edinburgh.",
+        "stock": "Medium",
+        "halal": false,
+        "kosher": true,
+        "vegetarian": true,
+        "vegan": true,
+        "creationDate": "2023-06-09T23:59:01.657Z",
+        "createdAt": "2023-06-09T23:59:24.887Z",
+        "updatedAt": "2023-06-13T10:19:01.921Z",
+        "__v": 0
+    },
+    {
+        "location": {
+            "latitude": 55.8496776,
+            "longitude": -4.3019907,
+            "latitudeDelta": 0.01,
+            "longitudeDelta": 0.01
+        },
+        "_id": "6487dc3609b8ac7231be5490",
+        "bankName": "Glasgow SW",
+        "description": "Long Life Milk\nDiluting Juice\nTinned Fruit, Meat, Vegetables And Fish\nPasta Sauce\nTea\nCoffee\nSugar\nToilet Rolls",
+        "stock": "low",
+        "halal": false,
+        "kosher": false,
+        "vegetarian": true,
+        "vegan": false,
+        "creationDate": "2023-06-13T03:02:09.459Z",
+        "createdAt": "2023-06-13T03:02:14.728Z",
+        "updatedAt": "2023-06-13T03:02:14.728Z",
+        "__v": 0
+    },
+    {
+        "location": {
+            "latitude": 55.8662639,
+            "longitude": -4.2615729,
+            "latitudeDelta": 0.01,
+            "longitudeDelta": 0.01
+        },
+        "_id": "6487dd0f09b8ac7231be5494",
+        "bankName": "Central and West Integration Network",
+        "description": "Unknown",
+        "stock": "high",
+        "halal": true,
+        "kosher": false,
+        "vegetarian": false,
+        "vegan": false,
+        "creationDate": "2023-06-13T03:02:09.459Z",
+        "createdAt": "2023-06-13T03:05:51.268Z",
+        "updatedAt": "2023-06-13T03:05:51.268Z",
+        "__v": 0
+    },
+    {
+        "location": {
+            "latitude": 55.8931553,
+            "longitude": -4.3252291,
+            "latitudeDelta": 0.01,
+            "longitudeDelta": 0.01
+        },
+        "_id": "6487dd1a09b8ac7231be5496",
+        "bankName": "Glasgow Vineyard Storehouse",
+        "description": "Unknown",
+        "stock": "high",
+        "halal": true,
+        "kosher": true,
+        "vegetarian": false,
+        "vegan": false,
+        "creationDate": "2023-06-13T03:02:09.459Z",
+        "createdAt": "2023-06-13T03:06:02.705Z",
+        "updatedAt": "2023-06-13T03:06:02.705Z",
+        "__v": 0
+    },
+    {
+        "location": {
+            "latitude": 55.83488449999999,
+            "longitude": -4.2695884,
+            "latitudeDelta": 0.01,
+            "longitudeDelta": 0.01
+        },
+        "_id": "6487dd2109b8ac7231be5498",
+        "bankName": "Queen's Park Govanhill Parish Church",
+        "description": "Unknown",
+        "stock": "low",
+        "halal": false,
+        "kosher": false,
+        "vegetarian": false,
+        "vegan": false,
+        "creationDate": "2023-06-13T03:02:09.459Z",
+        "createdAt": "2023-06-13T03:06:09.109Z",
+        "updatedAt": "2023-06-13T03:06:09.109Z",
+        "__v": 0
+    },
+    {
+        "location": {
+            "latitude": 55.8410454,
+            "longitude": -4.2575879,
+            "latitudeDelta": 0.01,
+            "longitudeDelta": 0.01
+        },
+        "_id": "6487dd2a09b8ac7231be549a",
+        "bankName": "Glasgow SE",
+        "description": "Cereal\nTinned Ham, Corned Beef, Hotdogs\nDiluting Juice (1 Litre)\nTinned Rice/custard\nUHT Milk\nInstant Coffee\nTinned Fish\nBiscuits\nTinned Tomatoes\nChickpeas\nToilet Roll",
+        "stock": "high",
+        "halal": true,
+        "kosher": true,
+        "vegetarian": true,
+        "vegan": true,
+        "creationDate": "2023-06-13T03:02:09.459Z",
+        "createdAt": "2023-06-13T03:06:18.031Z",
+        "updatedAt": "2023-06-13T03:06:18.031Z",
+        "__v": 0
+    },
+    {
+        "location": {
+            "latitude": 55.8857352,
+            "longitude": -4.3644207,
+            "latitudeDelta": 0.01,
+            "longitudeDelta": 0.01
+        },
+        "_id": "6487dd3309b8ac7231be549c",
+        "bankName": "Glasgow NW",
+        "description": "UHT Milk\nDiluting Juice\nCustard / Rice Pudding\nTinned Meat\nTinned Veg\nTinned Tomatoes\nShower Gel & Shampoo\nTea & Instant Coffee\nDeodorant\nInstant Coffee, Small Jars\nShaving Foam & Razors\nTinned Or Boxed Potatoes",
+        "stock": "low",
+        "halal": true,
+        "kosher": false,
+        "vegetarian": true,
+        "vegan": true,
+        "creationDate": "2023-06-13T03:02:09.459Z",
+        "createdAt": "2023-06-13T03:06:27.965Z",
+        "updatedAt": "2023-06-13T03:06:27.965Z",
+        "__v": 0
+    },
+    {
+        "location": {
+            "latitude": 55.832873,
+            "longitude": -4.3604445,
+            "latitudeDelta": 0.01,
+            "longitudeDelta": 0.01
+        },
+        "_id": "6487dd3c09b8ac7231be549e",
+        "bankName": "Crookston Community Group",
+        "description": "Unknown",
+        "stock": "medium",
+        "halal": false,
+        "kosher": false,
+        "vegetarian": true,
+        "vegan": false,
+        "creationDate": "2023-06-13T03:02:09.459Z",
+        "createdAt": "2023-06-13T03:06:36.247Z",
+        "updatedAt": "2023-06-13T03:06:36.247Z",
+        "__v": 0
+    },
+    {
+        "location": {
+            "latitude": 55.83287199999999,
+            "longitude": -4.3604445,
+            "latitudeDelta": 0.01,
+            "longitudeDelta": 0.01
+        },
+        "_id": "6487dd4509b8ac7231be54a0",
+        "bankName": "Crookson",
+        "description": "Unknown",
+        "stock": "medium",
+        "halal": false,
+        "kosher": false,
+        "vegetarian": false,
+        "vegan": true,
+        "creationDate": "2023-06-13T03:02:09.459Z",
+        "createdAt": "2023-06-13T03:06:45.659Z",
+        "updatedAt": "2023-06-13T03:06:45.659Z",
+        "__v": 0
+    },
+    {
+        "location": {
+            "latitude": 55.8344144,
+            "longitude": -4.2609841,
+            "latitudeDelta": 0.01,
+            "longitudeDelta": 0.01
+        },
+        "_id": "6487dd4d09b8ac7231be54a2",
+        "bankName": "AFECC",
+        "description": "Unknown",
+        "stock": "medium",
+        "halal": false,
+        "kosher": false,
+        "vegetarian": true,
+        "vegan": true,
+        "creationDate": "2023-06-13T03:02:09.459Z",
+        "createdAt": "2023-06-13T03:06:53.530Z",
+        "updatedAt": "2023-06-13T03:06:53.530Z",
+        "__v": 0
+    },
+    {
+        "location": {
+            "latitude": 55.8732221,
+            "longitude": -4.4040817,
+            "latitudeDelta": 0.01,
+            "longitudeDelta": 0.01
+        },
+        "_id": "6487dd5909b8ac7231be54a4",
+        "bankName": "Renfrewshire",
+        "description": "Cleaning Items Such As Bleach, Washing Up Liquid And Cleaning Spray\nTinned Rice And Tinned Custard\nBiscuits\nShampoo, Conditioner, Deodorant, Shower Gel, Shaving Gel And Razors\nTinned Veg (Carrots, Peas, Sweetcorn)\nCat Food\nTinned Fruit\nCondiments",
+        "stock": "high",
+        "halal": true,
+        "kosher": true,
+        "vegetarian": false,
+        "vegan": false,
+        "creationDate": "2023-06-13T03:02:09.459Z",
+        "createdAt": "2023-06-13T03:07:05.212Z",
+        "updatedAt": "2023-06-13T03:07:05.212Z",
+        "__v": 0
+    }
+]

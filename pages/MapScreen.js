@@ -12,6 +12,7 @@ import FilterList from './modal/FilterList';
 import BurgerButton from './modal/ui/BurgerButton';
 import ListButton from './modal/ui/ListButton';
 import * as Location from 'expo-location';
+import BanksDataJSON from '../api/BanksDataJSON.json'
 
 export default function MapScreen({ navigation }) {
 
@@ -23,7 +24,7 @@ export default function MapScreen({ navigation }) {
     const [focusedBank, setFocusedBank] = useState(Banks[1]);
     const [loggedIn, setLoggedIn] = useState([])
     const [currentUser, setCurrentUser] = useState([])
-    const [banks, setBanksList] = useState([]);
+    const [banks, setBanksList] = useState(BanksDataJSON);
     const [filterIndex, setFilterIndex] = useState(undefined);
 
     const [currentLocation, setCurrentLocation] = useState({
@@ -134,11 +135,12 @@ export default function MapScreen({ navigation }) {
     async function fetchBanksList(){
         try{
             const response = await fetch(API_BASE + '/foodbank')
-            const data = await response.json()
-            setBanksList(data);
-            console.log(banks)
+            if(response.state != 404 ){
+                const data = await response.json()
+                setBanksList(data)
+            }
         } catch (e){
-            console.log(e)
+            console.warn("API couldnt be contacted, defaulting to local storage. Some functionality may not work.")
         }
     }
 
