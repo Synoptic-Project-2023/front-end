@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
 
 		flex: 1,
 		left: "10%",
-		top: "10%",
+		paddingTop: "10%",
 		width: "80%",
 		height: "80%",
 	},

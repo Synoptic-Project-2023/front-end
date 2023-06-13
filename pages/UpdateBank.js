@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
 
 		flex: 1,
 		left: "10%",
-		top: "5%",
+		paddingTop: "5%",
 		width: "80%",
 		height: "85%",
 	},
