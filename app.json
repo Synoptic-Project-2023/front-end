@@ -18,13 +18,25 @@
       "supportsTablet": true
     },
     "android": {
+      "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION", "INTERNET"],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "dev.colehall.apk",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyD0lXUFMg9DL4Y9gu7XxugxOYk2Hqu-8Cw"
+          }
+        }
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "7521282c-d75b-4b9b-9161-3fac20351322"
+      }
     }
   }
 }
